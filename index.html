@@ -6,7 +6,7 @@
 <title>The Delta — Europe's Top Startup Ecosystem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500;1,9..40,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500;1,9..40,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
     --bg: #131323;
@@ -55,222 +55,64 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent);
-    display: inline-block;
+    display: block;
+    margin-bottom: 16px;
   }
 
-  h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+  h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin-top: 0; }
 
   /* ============ NAV ============ */
-  /* ============ NAV BAR ============ */
-  .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    padding: 12px 40px;
-    background: transparent;
-  }
-  .nav-inner {
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    background: rgba(19,19,35,0.6);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    padding: 0 28px;
-    border: 1px solid rgba(255,255,255,0.07);
-  }
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 12px 40px; background: transparent; }
+  .nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; background: rgba(19,19,35,0.6); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 0 28px; border: 1px solid rgba(255,255,255,0.07); }
   .nav-logo img { height: auto; width: 120px; }
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    list-style: none;
-  }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
   .nav-links > li { position: relative; }
-  .nav-links a {
-    font-size: 16px;
-    color: var(--muted-2);
-    transition: color 200ms var(--ease);
-  }
+  .nav-links a { font-size: 16px; color: var(--muted-2); transition: color 200ms var(--ease); }
   .nav-links a:hover { color: var(--text); }
-  .nav-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    cursor: pointer;
-  }
-  .nav-caret {
-    width: 10px; height: 10px;
-    flex: none;
-    transition: transform 300ms var(--ease);
-  }
+  .nav-trigger { display: inline-flex; align-items: center; gap: 7px; cursor: pointer; }
+  .nav-caret { width: 10px; height: 10px; flex: none; transition: transform 300ms var(--ease); }
   .nav-caret path { stroke: currentColor; }
   .has-dropdown:hover .nav-caret { transform: rotate(180deg); }
   .nav.mega-open .nav-caret { transform: rotate(180deg); }
-
-  /* ============ MEGA DROPDOWN ============ */
-  .nav-mega {
-    position: absolute;
-    top: calc(100% - 4px);
-    left: 40px;
-    right: 40px;
-    max-width: 1920px;
-    margin: 0 auto;
-    background: #f3f3f5;
-    border: 1px solid rgba(19,19,35,0.10);
-    display: grid;
-    grid-template-columns: minmax(220px, 1.02fr) 3fr 1fr;
-    gap: 0;
-    padding: 16px 16px 16px 26px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(6px);
-    transition: opacity 300ms var(--ease), transform 300ms var(--ease), visibility 300ms var(--ease);
-    z-index: 90;
-  }
-  .nav.mega-open .nav-mega {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-  .nav-mega-frame {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border: 1px solid rgba(19,19,35,0.13);
-  }
+  /* MEGA DROPDOWN */
+  .nav-mega { position: absolute; top: calc(100% - 4px); left: 40px; right: 40px; max-width: 1920px; margin: 0 auto; background: #f3f3f5; border: 1px solid rgba(19,19,35,0.10); display: grid; grid-template-columns: minmax(220px, 1.02fr) 3fr 1fr; gap: 0; padding: 16px 16px 16px 26px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(6px); transition: opacity 300ms var(--ease), transform 300ms var(--ease), visibility 300ms var(--ease); z-index: 90; }
+  .nav.mega-open .nav-mega { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+  .nav-mega-frame { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(19,19,35,0.13); }
   .nav-mega-col { padding: 32px 36px 44px; }
   .nav-mega-frame .nav-mega-col { border-right: 1px solid rgba(19,19,35,0.13); }
   .nav-mega-frame .nav-mega-col:last-child { border-right: none; }
-  .nav-mega-side {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding: 0;
-    border: 1px solid rgba(19,19,35,0.13);
-    border-left: none;
-  }
+  .nav-mega-side { display: flex; flex-direction: column; gap: 0; padding: 0; border: 1px solid rgba(19,19,35,0.13); border-left: none; }
   .nav-mega-side .nav-mega-group { padding: 30px 32px 38px; }
   .nav-mega-side .nav-mega-group + .nav-mega-group { border-top: 1px solid rgba(19,19,35,0.13); }
-  .nav-mega-promo {
-    position: relative;
-    overflow: hidden;
-    min-height: 460px;
-    min-width: 220px;
-  }
-  .nav-mega-promo img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .nav-mega-promo, .nav-mega-frame .nav-mega-col, .nav-mega-side {
-    opacity: 0;
-    transform: translateX(-10px);
-    transition: opacity 360ms var(--ease), transform 360ms var(--ease);
-  }
-  .nav.mega-open .nav-mega-promo,
-  .nav.mega-open .nav-mega-frame .nav-mega-col,
-  .nav.mega-open .nav-mega-side { opacity: 1; transform: translateX(0); }
+  .nav-mega-promo { position: relative; overflow: hidden; min-height: 460px; min-width: 220px; }
+  .nav-mega-promo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .nav-mega-promo, .nav-mega-frame .nav-mega-col, .nav-mega-side { opacity: 0; transform: translateX(-10px); transition: opacity 360ms var(--ease), transform 360ms var(--ease); }
+  .nav.mega-open .nav-mega-promo, .nav.mega-open .nav-mega-frame .nav-mega-col, .nav.mega-open .nav-mega-side { opacity: 1; transform: translateX(0); }
   .nav.mega-open .nav-mega-promo { transition-delay: 90ms; }
   .nav.mega-open .nav-mega-frame .nav-mega-col:nth-child(1) { transition-delay: 180ms; }
   .nav.mega-open .nav-mega-frame .nav-mega-col:nth-child(2) { transition-delay: 270ms; }
   .nav.mega-open .nav-mega-frame .nav-mega-col:nth-child(3) { transition-delay: 360ms; }
   .nav.mega-open .nav-mega-side { transition-delay: 450ms; }
-  .nav-mega-label {
-    font-size: 16px;
-    color: rgba(19,19,35,0.42);
-    margin-bottom: 28px;
-    font-weight: 400;
-  }
-  .nav-mega-list {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .nav-mega-list a {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: #131323;
-    font-weight: 400;
-    padding: 11px 16px;
-    margin: 0 -16px;
-    border: 1px solid transparent;
-    transition: color 180ms var(--ease), border-color 240ms var(--ease);
-  }
-  .nav-mega-list a::after {
-    content: "→";
-    margin-left: auto;
-    padding-left: 16px;
-    font-size: 18px;
-    line-height: 1;
-    color: var(--accent);
-    opacity: 0;
-    transform: translateX(-16px);
-    transition: opacity 240ms var(--ease), transform 240ms var(--ease);
-  }
+  .nav-mega-label { font-size: 16px; color: rgba(19,19,35,0.42); margin-bottom: 28px; font-weight: 400; }
+  .nav-mega-list { display: flex; flex-direction: column; gap: 6px; list-style: none; padding: 0; margin: 0; }
+  .nav-mega-list a { display: flex; align-items: center; font-size: 16px; color: #131323; font-weight: 400; padding: 11px 16px; margin: 0 -16px; border: 1px solid transparent; transition: color 180ms var(--ease), border-color 240ms var(--ease); }
+  .nav-mega-list a::after { content: "→"; margin-left: auto; padding-left: 16px; font-size: 18px; line-height: 1; color: var(--accent); opacity: 0; transform: translateX(-16px); transition: opacity 240ms var(--ease), transform 240ms var(--ease); }
   .nav-mega-list a:hover { color: var(--accent); border-color: rgba(19,19,35,0.16); }
   .nav-mega-list a:hover::after { opacity: 1; transform: translateX(0); }
   .nav-mega-list a.is-disabled { color: rgba(19,19,35,0.35); pointer-events: none; }
   .nav-mega-list a.is-disabled::after { content: none; }
-
-  /* ============ MOBILE NAV ============ */
-  .nav-burger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 40px; height: 40px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    flex: none;
-  }
-  .nav-burger span {
-    display: block;
-    width: 22px; height: 2px;
-    background: #fff;
-    transition: transform 220ms var(--ease), opacity 180ms var(--ease);
-  }
+  /* MOBILE NAV */
+  .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; background: none; border: none; cursor: pointer; flex: none; }
+  .nav-burger span { display: block; width: 22px; height: 2px; background: #fff; transition: transform 220ms var(--ease), opacity 180ms var(--ease); }
   .nav.menu-open .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav.menu-open .nav-burger span:nth-child(2) { opacity: 0; }
   .nav.menu-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  .mobile-menu {
-    display: none;
-    flex-direction: column;
-    margin: 8px 0 0;
-    padding: 12px;
-    background: rgba(19,19,35,0.92);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255,255,255,0.07);
-  }
-  .mobile-menu a {
-    padding: 14px 16px;
-    font-size: 16px;
-    color: var(--muted-2);
-    transition: background 180ms var(--ease);
-  }
+  .mobile-menu { display: none; flex-direction: column; margin: 8px 0 0; padding: 12px; background: rgba(19,19,35,0.92); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.07); }
+  .mobile-menu a { padding: 14px 16px; font-size: 16px; color: var(--muted-2); transition: background 180ms var(--ease); }
   .mobile-menu a:not(.btn):hover { background: rgba(255,255,255,0.06); }
   .mobile-menu a.btn { justify-content: center; margin-top: 8px; }
   .nav.menu-open .mobile-menu { display: flex; }
-  @media (max-width: 768px) {
-    .nav { padding: 12px 16px; }
-    .nav-links { display: none; }
-    .nav-cta-desktop { display: none; }
-    .nav-burger { display: flex; }
-  }
+  @media (max-width: 768px) { .nav { padding: 12px 16px; } .nav-links { display: none; } .nav-cta-desktop { display: none; } .nav-burger { display: flex; } }
 
   .btn {
     display: inline-flex;
@@ -287,15 +129,16 @@
     transition: transform 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease), color 200ms var(--ease);
   }
   .btn-white { background: #fff; color: #131323; }
-  .btn-white:hover { background: #e6e6e6; transform: translateY(-1px); }
+  .btn-white:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-1px); }
   .btn-purple { background: var(--accent); color: #fff; }
   .btn-purple:hover { background: #b300a0; transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.35); }
-  .btn-outline:hover { border-color: #fff; transform: translateY(-1px); }
+  .btn-outline { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.35); }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); transform: translateY(-1px); }
   .btn-lg { padding: 12px 26px; font-size: 14px; }
 
   /* ============ HERO ============ */
-  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+  .hero-viewport { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); flex: 1; min-height: 0; }
   .hero-bg {
     position: absolute;
     inset: 0;
@@ -314,7 +157,8 @@
     align-items: center;
     padding: 64px;
     width: 100%;
-    min-height: 85vh;
+    min-height: 0;
+    height: 100%;
   }
   .hero-text-col {
     flex: 1;
@@ -324,7 +168,7 @@
     font-size: 78px;
     font-weight: 400;
     line-height: 1.0;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     letter-spacing: -0.03em;
   }
   .hero h1 .accent { color: var(--accent); display: inline; font-weight: 400; }
@@ -449,13 +293,13 @@
     grid-template-columns: repeat(4, 1fr);
   }
   .stat {
-    padding: 48px 40px;
+    padding: 28px 40px;
     text-align: left;
     border-right: 1px solid rgba(255,255,255,0.08);
   }
   .stat:last-child { border-right: none; }
   .stat-num {
-    font-size: 72px;
+    font-size: 54px;
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 1;
@@ -464,7 +308,7 @@
   }
   .stat-num .plus {
     font-size: 40px;
-    color: rgba(255,255,255,0.45);
+    color: #A1A1A7;
     font-weight: 400;
     vertical-align: super;
     margin-left: 2px;
@@ -489,7 +333,7 @@
     text-align: center;
     font-size: 13px;
     letter-spacing: 0;
-    color: rgba(255,255,255,0.5);
+    color: #A1A1A7;
     margin-bottom: 32px;
     font-weight: 400;
   }
@@ -582,7 +426,7 @@
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
+    color: #A1A1A7;
     margin-bottom: 20px;
   }
   .launchpad-h2 {
@@ -599,7 +443,7 @@
     margin-bottom: 6px;
   }
   .launchpad-body {
-    color: rgba(255,255,255,0.55);
+    color: #A1A1A7;
     font-size: 13px;
     max-width: 380px;
     margin-bottom: 16px;
@@ -649,16 +493,13 @@
     align-items: flex-start;
     justify-content: space-between;
   }
-  .offer-icon img {
-    width: 36px; height: 36px;
-    object-fit: contain;
-    display: block;
-    filter: brightness(0) invert(1) opacity(0.5);
-    transition: filter 600ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .offer-card:hover .offer-icon img {
-    filter: brightness(0) invert(1) sepia(1) saturate(8) hue-rotate(284deg) brightness(1.1);
-  }
+  .offer-icon { position: relative; width: 40px; height: 40px; flex-shrink: 0; }
+  .offer-icon .icon-default,
+  .offer-icon .icon-hover { position: absolute; inset: 0; width: 40px; height: 40px; object-fit: contain; display: block; transition: opacity 200ms ease; }
+  .offer-icon .icon-default { opacity: 1; }
+  .offer-icon .icon-hover { opacity: 0; }
+  .offer-card:hover .offer-icon .icon-default { opacity: 0; }
+  .offer-card:hover .offer-icon .icon-hover { opacity: 1; }
   .offer-arrow {
     font-size: 16px;
     line-height: 1;
@@ -678,15 +519,15 @@
   }
   .offer-card:hover .offer-arrow-icon {
     transform: rotate(-45deg);
-    color: var(--accent);
+    color: #fff;
   }
   .offer-card:hover .offer-arrow {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.18);
+    background: var(--accent);
+    border-color: var(--accent);
   }
   .offer-card-bottom { position: relative; z-index: 1; }
-  .offer-card h3 { font-size: 22px; font-weight: 400; margin-bottom: 10px; color: #fff; }
-  .offer-card p { color: rgba(255,255,255,0.55); font-size: 13px; line-height: 1.6; }
+  .offer-card h3 { font-size: 32px; font-weight: 400; margin-bottom: 10px; color: #fff; }
+  .offer-card p { color: #A1A1A7; font-size: 16px; line-height: 1.6; }
   .offer-card.cta-card {
     position: relative;
     overflow: hidden;
@@ -711,7 +552,7 @@
   }
   .offer-card.cta-card .offer-card-bottom { z-index: 2; }
   .offer-card.cta-card { justify-content: flex-end; }
-  .offer-card.cta-card h3 { font-size: 26px; font-weight: 400; }
+  .offer-card.cta-card h3 { font-size: 32px; font-weight: 400; }
   .offer-card.cta-card .btn { margin-top: 16px; font-size: 13px; padding: 10px 18px; }
 
   /* ============ QUOTE ============ */
@@ -814,7 +655,7 @@
   }
   .tab:last-child { border-bottom: none; }
   .tab-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .tab-title { font-size: 28px; font-weight: 400; color: #fff; }
+  .tab-title { font-size: 32px; font-weight: 400; color: #fff; }
   .tab-title .tab-name { color: #fff; transition: color 300ms var(--ease); }
   .tab.active .tab-title .tab-name { color: var(--accent); }
   .tab-arrow-box {
@@ -827,12 +668,12 @@
   .tab-arrow-icon {
     display: inline-block;
     font-size: 16px;
-    color: rgba(255,255,255,0.5);
+    color: #A1A1A7;
     transition: transform 500ms cubic-bezier(0.2,0.7,0.2,1), color 500ms cubic-bezier(0.2,0.7,0.2,1);
   }
   .tab.active .tab-arrow-icon,
-  .tab:hover .tab-arrow-icon { transform: rotate(-45deg); color: var(--accent); }
-  .tab:hover .tab-arrow-box { background: rgba(255,255,255,0.08); }
+  .tab:hover .tab-arrow-icon { transform: rotate(-45deg); color: #fff; }
+  .tab:hover .tab-arrow-box { background: var(--accent); border-color: var(--accent); }
   .tab-desc-wrap {
     display: grid;
     grid-template-rows: 0fr;
@@ -842,11 +683,11 @@
   .tab-desc-inner { overflow: hidden; }
   .tab-desc {
     color: rgba(255,255,255,0.7);
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.6;
     opacity: 0;
     transition: opacity 400ms cubic-bezier(0.2,0.7,0.2,1) 120ms;
-    padding-top: 14px;
+    padding-top: 4px;
   }
   .tab.active .tab-desc { opacity: 1; }
   .tab-glow { display: none; }
@@ -901,9 +742,9 @@
   /* ============ TRUSTED BY LEADERS ============ */
   .leaders-section { background: #131323; }
   .leaders-head { margin-bottom: 40px; }
-  .leaders-head .eyebrow { margin-bottom: 12px; display: block; color: rgba(255,255,255,0.45); }
+  .leaders-head .eyebrow { margin-bottom: 12px; display: block; color: #A1A1A7; }
   .leaders-head h2 { font-size: 48px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 14px; }
-  .leaders-head p { color: rgba(255,255,255,0.55); max-width: 380px; font-size: 13px; line-height: 1.6; }
+  .leaders-head p { color: #A1A1A7; max-width: 560px; font-size: 13px; line-height: 1.6; }
   .leaders-grid {
     display: flex;
     flex-direction: column;
@@ -953,21 +794,23 @@
     line-height: 1.55;
     margin-bottom: 14px;
   }
-  .leader-person-name { font-size: 14px; color: rgba(255,255,255,0.45); }
+  .leader-person-name { font-size: 14px; color: #A1A1A7; }
 
   /* ============ LATEST POSTS ============ */
   .posts-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
-  .post-card { background: transparent; overflow: hidden; }
-  .post-photo { height: 480px; overflow: hidden; border-radius: 4px; }
+  .post-card { background: transparent; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+  .post-photo { height: 260px; overflow: hidden; border-radius: 0; }
   .post-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .post-body { padding: 18px 0 0; }
-  .post-tag { font-size: 14px; font-weight: 600; color: #fff; display: block; margin-bottom: 8px; }
-  .post-title { font-size: 15px; font-weight: 400; margin: 0 0 8px; color: rgba(255,255,255,0.85); }
-  .post-excerpt { color: rgba(255,255,255,0.5); font-size: 13px; }
+  .post-body { padding: 24px; }
+  .post-tag { display: none; }
+  .post-title { font-size: 32px; font-weight: 400; margin: 0 0 12px; color: #fff; line-height: 1.2; }
+  .post-excerpt { color: #A1A1A7; font-size: 16px; line-height: 1.6; margin-bottom: 24px; }
+  .post-cta { display: inline-block; padding: 8px 18px; border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 13px; border-radius: 2px; text-decoration: none; transition: background 200ms, border-color 200ms; }
+  .post-cta:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.6); }
   .posts-foot { text-align: center; margin-top: 48px; }
 
   /* ============ CTA BANNER ============ */
@@ -980,7 +823,7 @@
     padding: 96px 64px;
   }
   .cta-banner {
-    max-width: 640px;
+    max-width: 820px;
     margin: 0 auto;
   }
   .cta-banner h2 { font-size: 56px; font-weight: 400; letter-spacing: -0.02em; color: #131323; margin-bottom: 20px; line-height: 1.1; }
@@ -990,8 +833,6 @@
   /* ============ FOOTER ============ */
   .footer {
     background: #0d0d14;
-    border-top: 2px solid transparent;
-    border-image: linear-gradient(90deg, #6B21A8, #E6199A, #3B82F6) 1;
     padding: 64px 0 0;
   }
   .footer-top {
@@ -1001,7 +842,7 @@
     padding-bottom: 64px;
   }
   .footer-brand img { height: 56px; width: auto; margin-bottom: 24px; display: block; }
-  .footer-brand p { color: rgba(255,255,255,0.45); max-width: 220px; font-size: 14px; line-height: 1.6; }
+  .footer-brand p { color: #A1A1A7; max-width: 220px; font-size: 14px; line-height: 1.6; }
   .footer-col h4 {
     font-size: 15px;
     font-style: italic;
@@ -1010,7 +851,7 @@
     margin-bottom: 22px;
   }
   .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 13px; }
-  .footer-col a { font-size: 13.5px; color: rgba(255,255,255,0.45); transition: color 200ms var(--ease); }
+  .footer-col a { font-size: 13.5px; color: #A1A1A7; transition: color 200ms var(--ease); }
   .footer-col a:hover { color: rgba(255,255,255,0.9); }
   .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.08);
@@ -1178,7 +1019,8 @@
   </div>
 </nav>
 
-<!-- ============ HERO ============ -->
+<!-- ============ HERO + STATS VIEWPORT ============ -->
+<div class="hero-viewport">
 <header class="hero" id="top">
   <div class="hero-bg">
     <video autoplay muted loop playsinline poster="project/assets/hero-bg.png">
@@ -1187,10 +1029,10 @@
   </div>
   <div class="hero-inner">
     <div class="hero-text-col">
-      <h1>We Build Europe's Top<br><span class="accent" id="typeTarget"></span><span class="type-cursor" id="typeCursor">|</span></h1>
-      <p class="hero-lede">A Berlin venture campus and ecosystem. Workspace, Studio, Services, Network, Events. Five pillars built around founders. The Delta Studio co-founds and funds high-impact companies alongside serial operators-partners.</p>
+      <h1>Berlin's Home<br>for Europe's Top<br><span class="accent"><span id="typeTarget">Venture Studios.</span><span class="type-cursor" id="typeCursor">|</span></span></h1>
+      <p class="hero-lede" style="font-size:20px">The Delta co-builds high-impact companies across Europe's biggest startup cities. Home to 800+ founders, €1.5b+ raised, and everything a venture needs under one roof.</p>
       <div class="hero-ctas">
-        <a class="btn btn-white btn-lg" href="#contact">Book a call</a>
+        <a class="btn btn-white btn-lg" href="#contact">Start Building With Us</a>
         <a class="btn btn-outline btn-lg" href="#contact">Contact us</a>
       </div>
     </div>
@@ -1237,6 +1079,7 @@
     </div>
   </div>
 </section>
+</div><!-- /.hero-viewport -->
 
 <!-- ============ PARTNERS ============ -->
 <section class="partners">
@@ -1266,11 +1109,11 @@
     <div class="launchpad-text">
       <div class="launchpad-top" data-reveal="left">
         <span class="launchpad-eyebrow">Exclusive Workspace</span>
-        <h2 class="launchpad-h2">A Launchpad<br>For Founders</h2>
+        <h2 class="launchpad-h2">Berlin's Home for Early-Stage Founders</h2>
       </div>
       <div class="launchpad-bottom" data-reveal="left">
-        <p class="launchpad-sub" style="font-size:24px">The base of Berlin's top 1000 founders</p>
-        <p class="launchpad-body" style="font-size:16px;width:450px">Our vision is to accelerate, and back the top 1,000 founders in each of Africa &amp; Europe's biggest startup capitals, starting with Berlin.</p>
+        <p class="launchpad-sub" style="font-size:24px;margin:24px 0 0">The base of Berlin's top 1000 founders</p>
+        <p class="launchpad-body" style="font-size:16px;width:450px;margin:0 0 16px">Our vision is to accelerate, and back the top 1,000 founders in each of Africa &amp; Europe's biggest startup capitals, starting with Berlin.</p>
         <a class="btn btn-outline" style="align-self:flex-start;padding:14px 22px;font-size:14px;font-weight:600;" href="#about">Find out more about our campus</a>
       </div>
     </div>
@@ -1284,65 +1127,65 @@
 <section class="section" id="offerings">
   <div class="container">
     <div class="section-head" data-reveal>
-      <span class="eyebrow" style="color:rgba(255,255,255,0.45)">Exclusive Workspace</span>
+      <span class="eyebrow" style="color:#A1A1A7">Exclusive Workspace</span>
       <h2 style="font-size:64px;font-weight:400">Access To Everything<br>A Founder Needs</h2>
     </div>
     <div class="offer-grid">
       <div class="offer-card workspace-card" data-reveal data-delay="0">
         <div class="offer-card-top">
-          <div class="offer-icon"><img src="project/assets/icon-workspace.png" alt="Workspace" /></div>
+          <div class="offer-icon"><img class="icon-default" src="project/assets/icon-workspace-grey.png" alt="Workspace" /><img class="icon-hover" src="project/assets/icon-workspace-pink.png" alt="" /></div>
           <span class="offer-arrow"><span class="offer-arrow-icon">→</span></span>
         </div>
         <div class="offer-card-bottom">
           <h3>Workspace</h3>
-          <p>A curated workspace with coworking, private offices, wellness, and event spaces for all building members.</p>
+          <p>A curated campus where founders and their teams can focus, collaborate, and grow. With flexible desks, private offices, and meeting spaces built for startups.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="80">
         <div class="offer-card-top">
-          <div class="offer-icon"><img src="project/assets/icon-studio.png" alt="Studio" /></div>
+          <div class="offer-icon"><img class="icon-default" src="project/assets/icon-studio-grey.png" alt="Studio" /><img class="icon-hover" src="project/assets/icon-studio-pink.png" alt="" /></div>
           <span class="offer-arrow"><span class="offer-arrow-icon">→</span></span>
         </div>
         <div class="offer-card-bottom">
           <h3>Studio</h3>
-          <p>A hands-on studio providing capital, mentorship, and experienced operators from day one.</p>
+          <p>A hands-on venture studio where we co-build companies from day one. Providing the structure, resources, and expertise to turn ideas into investable businesses.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="160">
         <div class="offer-card-top">
-          <div class="offer-icon"><img src="project/assets/icon-services.png" alt="Services" /></div>
+          <div class="offer-icon"><img class="icon-default" src="project/assets/icon-services-grey.png" alt="Services" /><img class="icon-hover" src="project/assets/icon-services-pink.png" alt="" /></div>
           <span class="offer-arrow"><span class="offer-arrow-icon">→</span></span>
         </div>
         <div class="offer-card-bottom">
           <h3>Services</h3>
-          <p>Embedded teams work alongside your venture to validate, build, and scale without the cost of full-time hires.</p>
+          <p>Embedded venture experts across legal, finance, marketing, and product. Working alongside your team without the cost or commitment of full-time hires.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="0">
         <div class="offer-card-top">
-          <div class="offer-icon"><img src="project/assets/icon-network.png" alt="Network" /></div>
+          <div class="offer-icon"><img class="icon-default" src="project/assets/icon-network-grey.png" alt="Network" /><img class="icon-hover" src="project/assets/icon-network-pink.png" alt="" /></div>
           <span class="offer-arrow"><span class="offer-arrow-icon">→</span></span>
         </div>
         <div class="offer-card-bottom">
           <h3>Network</h3>
-          <p>We connect founders, mentors, investors, talent, and partners with a focus on trust and alignment.</p>
+          <p>Direct access to 800+ founders, operators, mentors, and investors across Europe's most active startup communities. The relationships that move companies forward.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="80">
         <div class="offer-card-top">
-          <div class="offer-icon"><img src="project/assets/icon-events.png" alt="Events" /></div>
+          <div class="offer-icon"><img class="icon-default" src="project/assets/icon-events-grey.png" alt="Events" /><img class="icon-hover" src="project/assets/icon-events-pink.png" alt="" /></div>
           <span class="offer-arrow"><span class="offer-arrow-icon">→</span></span>
         </div>
         <div class="offer-card-bottom">
           <h3>Events</h3>
-          <p>Fireside chats, peer groups, masterclasses, dinners, and studio open days boost founder growth.</p>
+          <p>Founder dinners, workshops, pitch nights, and curated gatherings designed to spark the connections and conversations that early-stage companies need most.</p>
         </div>
       </div>
       <div class="offer-card cta-card" data-reveal data-delay="160">
         <img src="project/assets/offer-cta-bg.png" alt="Campus" />
         <div class="offer-card-bottom">
-          <h3>Secure Your Spot</h3>
-          <a class="btn btn-outline" href="#contact">Book a call</a>
+          <h3>Spots Are Limited</h3>
+          <a class="btn btn-outline" href="#contact">Start Building With Us</a>
         </div>
       </div>
     </div>
@@ -1436,7 +1279,7 @@
         </div>
         <div class="leader-col quote">
           <div>
-            <p class="leader-quote-text">&ldquo;Each campus is designed to provide an end-to-end platform, where founders can access everything they need to transform themselves and their ventures&rdquo;</p>
+            <p class="leader-quote-text" style="font-size:24px">&ldquo;Each campus is designed to provide an end-to-end platform, where founders can access everything they need to transform themselves and their ventures&rdquo;</p>
             <div class="leader-person-name">Louis Buys</div>
           </div>
         </div>
@@ -1444,7 +1287,7 @@
       <div class="leader-card card-2">
         <div class="leader-col quote">
           <div>
-            <p class="leader-quote-text">&ldquo;Each campus is designed to provide an end-to-end platform, where founders can access everything they need to transform themselves and their ventures&rdquo;</p>
+            <p class="leader-quote-text" style="font-size:24px">&ldquo;Each campus is designed to provide an end-to-end platform, where founders can access everything they need to transform themselves and their ventures&rdquo;</p>
             <div class="leader-person-name">Louis Buys</div>
           </div>
         </div>
@@ -1468,24 +1311,32 @@
     </div>
     <div class="posts-grid" data-reveal>
       <article class="post-card">
-        <div class="post-photo"><img src="project/assets/post-building.jpg" alt="The Delta campus" /></div>
+        <div class="post-photo"><img src="project/assets/post-building.jpg" alt="Startup Spotlight" /></div>
         <div class="post-body">
-          <span class="post-tag" style="font-size:24px">Network</span>
-          <h3 class="post-title">We connect founders, mentors, investors and talent</h3>
-          <p class="post-excerpt">We connect founders, mentors, investors, talent, and partners with a focus on trust and alignment.</p>
+          <h3 class="post-title">Startup Spotlight</h3>
+          <p class="post-excerpt">Discover how emerging startups are reshaping the tech landscape with innovative solutions and bold ideas.</p>
+          <a class="post-cta" href="#">Read the article</a>
         </div>
       </article>
       <article class="post-card">
-        <div class="post-photo"><img src="project/assets/post-building.jpg" alt="The Delta campus" /></div>
+        <div class="post-photo"><img src="project/assets/post-building.jpg" alt="Innovation Hub" /></div>
         <div class="post-body">
-          <span class="post-tag" style="font-size:24px">Network</span>
-          <h3 class="post-title">We connect founders, mentors, investors and talent</h3>
-          <p class="post-excerpt">We connect founders, mentors, investors, talent, and partners with a focus on trust and alignment.</p>
+          <h3 class="post-title">Innovation Hub</h3>
+          <p class="post-excerpt">Inside the latest trends driving startup growth and investment opportunities worldwide.</p>
+          <a class="post-cta" href="#">View</a>
+        </div>
+      </article>
+      <article class="post-card">
+        <div class="post-photo"><img src="project/assets/post-building.jpg" alt="Founders' Forum" /></div>
+        <div class="post-body">
+          <h3 class="post-title">Founders' Forum</h3>
+          <p class="post-excerpt">Insights from top entrepreneurs on navigating challenges and scaling new ventures successfully.</p>
+          <a class="post-cta" href="#">Read the article</a>
         </div>
       </article>
     </div>
     <div class="posts-foot">
-      <a class="btn btn-outline btn-lg" href="#">View all posts</a>
+      <a class="btn btn-white btn-lg" href="#">View all articles</a>
     </div>
   </div>
 </section>
@@ -1493,8 +1344,8 @@
 <!-- ============ CTA BANNER ============ -->
 <section class="cta-banner-wrap" id="contact">
   <div class="cta-banner" data-reveal>
-    <h2>Ready To Build Something Great?</h2>
-    <p>Whether you're looking for workspace, support for your venture, or want to join our ecosystem.</p>
+    <h2>Ready to Join Berlin's Most Connected Startup Campus?</h2>
+    <p>Whether you need a coworking desk, a private startup office, or full venture support, book a tour of The Delta Berlin.</p>
     <div class="hero-ctas" style="justify-content:center">
       <a class="btn btn-outline btn-lg" style="color:#131323;border-color:rgba(19,19,35,0.4);" href="#contact">Get in touch</a>
     </div>
@@ -1510,7 +1361,7 @@
         <p>An ecosystem that helps founders solve the world's biggest problems.</p>
       </div>
       <div class="footer-col">
-        <h4>Offerings</h4>
+        <h4 style="font-size:20px">Offerings</h4>
         <ul>
           <li><a href="#">Product Strategy</a></li>
           <li><a href="#">Brand Design</a></li>
@@ -1523,7 +1374,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>The Delta Pillars</h4>
+        <h4 style="font-size:20px">The Delta Pillars</h4>
         <ul>
           <li><a href="#">Studio</a></li>
           <li><a href="#">Services</a></li>
@@ -1533,7 +1384,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Resources</h4>
+        <h4 style="font-size:20px">Resources</h4>
         <ul>
           <li><a href="#">About</a></li>
           <li><a href="#">Case studies</a></li>
@@ -1710,8 +1561,8 @@
     });
   })();
 </script>
+
 <script>
-  // Mega dropdown: hover nav-links or mega panel to open, delay before close
   (function () {
     var nav = document.querySelector('.nav');
     if (!nav) return;
@@ -1729,8 +1580,9 @@
       el.addEventListener('mouseleave', scheduleClose);
     });
   })();
+</script>
 
-  // Mobile burger toggle
+<script>
   (function () {
     var nav = document.querySelector('.nav');
     var burger = document.getElementById('navBurger');
