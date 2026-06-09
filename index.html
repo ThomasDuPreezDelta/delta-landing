@@ -55,10 +55,11 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent);
-    display: inline-block;
+    display: block;
+    margin-bottom: 16px;
   }
 
-  h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+  h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin-top: 0; }
 
   /* ============ NAV ============ */
   .nav {
@@ -110,15 +111,16 @@
     transition: transform 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease), color 200ms var(--ease);
   }
   .btn-white { background: #fff; color: #131323; }
-  .btn-white:hover { background: #e6e6e6; transform: translateY(-1px); }
+  .btn-white:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-1px); }
   .btn-purple { background: var(--accent); color: #fff; }
   .btn-purple:hover { background: #b300a0; transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.35); }
-  .btn-outline:hover { border-color: #fff; transform: translateY(-1px); }
+  .btn-outline { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.35); }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); transform: translateY(-1px); }
   .btn-lg { padding: 12px 26px; font-size: 14px; }
 
   /* ============ HERO ============ */
-  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+  .hero-viewport { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); flex: 1; min-height: 0; }
   .hero-bg {
     position: absolute;
     inset: 0;
@@ -137,7 +139,8 @@
     align-items: center;
     padding: 64px;
     width: 100%;
-    min-height: 85vh;
+    min-height: 0;
+    height: 100%;
   }
   .hero-text-col {
     flex: 1;
@@ -147,7 +150,7 @@
     font-size: 78px;
     font-weight: 400;
     line-height: 1.0;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     letter-spacing: -0.03em;
   }
   .hero h1 .accent { color: var(--accent); display: inline; font-weight: 400; }
@@ -272,13 +275,13 @@
     grid-template-columns: repeat(4, 1fr);
   }
   .stat {
-    padding: 48px 40px;
+    padding: 28px 40px;
     text-align: left;
     border-right: 1px solid rgba(255,255,255,0.08);
   }
   .stat:last-child { border-right: none; }
   .stat-num {
-    font-size: 72px;
+    font-size: 54px;
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 1;
@@ -472,15 +475,16 @@
     align-items: flex-start;
     justify-content: space-between;
   }
+  .offer-icon { position: relative; width: 36px; height: 36px; flex-shrink: 0; }
   .offer-icon img {
     width: 36px; height: 36px;
     object-fit: contain;
     display: block;
-    filter: brightness(0) invert(1) opacity(0.5);
-    transition: filter 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    filter: opacity(0.45);
+    transition: filter 400ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .offer-card:hover .offer-icon img {
-    filter: brightness(0) invert(1) sepia(1) saturate(8) hue-rotate(284deg) brightness(1.1);
+    filter: brightness(0) invert(1) sepia(1) saturate(100) hue-rotate(247deg) brightness(0.45);
   }
   .offer-arrow {
     font-size: 16px;
@@ -501,11 +505,11 @@
   }
   .offer-card:hover .offer-arrow-icon {
     transform: rotate(-45deg);
-    color: var(--accent);
+    color: #fff;
   }
   .offer-card:hover .offer-arrow {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.18);
+    background: var(--accent);
+    border-color: var(--accent);
   }
   .offer-card-bottom { position: relative; z-index: 1; }
   .offer-card h3 { font-size: 22px; font-weight: 400; margin-bottom: 10px; color: #fff; }
@@ -654,8 +658,8 @@
     transition: transform 500ms cubic-bezier(0.2,0.7,0.2,1), color 500ms cubic-bezier(0.2,0.7,0.2,1);
   }
   .tab.active .tab-arrow-icon,
-  .tab:hover .tab-arrow-icon { transform: rotate(-45deg); color: var(--accent); }
-  .tab:hover .tab-arrow-box { background: rgba(255,255,255,0.08); }
+  .tab:hover .tab-arrow-icon { transform: rotate(-45deg); color: #fff; }
+  .tab:hover .tab-arrow-box { background: var(--accent); border-color: var(--accent); }
   .tab-desc-wrap {
     display: grid;
     grid-template-rows: 0fr;
@@ -920,7 +924,8 @@
   </div>
 </nav>
 
-<!-- ============ HERO ============ -->
+<!-- ============ HERO + STATS VIEWPORT ============ -->
+<div class="hero-viewport">
 <header class="hero" id="top">
   <div class="hero-bg">
     <video autoplay muted loop playsinline poster="project/assets/hero-bg.png">
@@ -929,8 +934,8 @@
   </div>
   <div class="hero-inner">
     <div class="hero-text-col">
-      <h1>We Build Europe's Top<br><span class="accent" id="typeTarget"></span><span class="type-cursor" id="typeCursor">|</span></h1>
-      <p class="hero-lede">A Berlin venture campus and ecosystem. Workspace, Studio, Services, Network, Events. Five pillars built around founders. The Delta Studio co-founds and funds high-impact companies alongside serial operators-partners.</p>
+      <h1>Berlin's Home<br>for Europe's Top<br><span class="accent"><span id="typeTarget">Venture Studios.</span><span class="type-cursor" id="typeCursor">|</span></span></h1>
+      <p class="hero-lede">The Delta co-builds high-impact companies across Europe's biggest startup cities. Home to 800+ founders, €1.5b+ raised, and everything a venture needs under one roof.</p>
       <div class="hero-ctas">
         <a class="btn btn-white btn-lg" href="#contact">Book a call</a>
         <a class="btn btn-outline btn-lg" href="#contact">Contact us</a>
@@ -957,6 +962,7 @@
 </header>
 
 <!-- ============ STATS BAR ============ -->
+
 <section class="stats-bar">
   <div class="container">
     <div class="stats-grid" data-reveal>
@@ -979,6 +985,9 @@
     </div>
   </div>
 </section>
+
+
+</div><!-- /.hero-viewport -->
 
 <!-- ============ PARTNERS ============ -->
 <section class="partners">
@@ -1008,7 +1017,7 @@
     <div class="launchpad-text">
       <div class="launchpad-top" data-reveal="left">
         <span class="launchpad-eyebrow">Exclusive Workspace</span>
-        <h2 class="launchpad-h2">A Launchpad<br>For Founders</h2>
+        <h2 class="launchpad-h2">Berlin's Home for Early-Stage Founders</h2>
       </div>
       <div class="launchpad-bottom" data-reveal="left">
         <p class="launchpad-sub" style="font-size:24px">The base of Berlin's top 1000 founders</p>
@@ -1037,7 +1046,7 @@
         </div>
         <div class="offer-card-bottom">
           <h3>Workspace</h3>
-          <p>A curated workspace with coworking, private offices, wellness, and event spaces for all building members.</p>
+          <p>A curated campus where founders and their teams can focus, collaborate, and grow. With flexible desks, private offices, and meeting spaces built for startups.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="80">
@@ -1047,7 +1056,7 @@
         </div>
         <div class="offer-card-bottom">
           <h3>Studio</h3>
-          <p>A hands-on studio providing capital, mentorship, and experienced operators from day one.</p>
+          <p>A hands-on venture studio where we co-build companies from day one. Providing the structure, resources, and expertise to turn ideas into investable businesses.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="160">
@@ -1057,7 +1066,7 @@
         </div>
         <div class="offer-card-bottom">
           <h3>Services</h3>
-          <p>Embedded teams work alongside your venture to validate, build, and scale without the cost of full-time hires.</p>
+          <p>Embedded venture experts across legal, finance, marketing, and product. Working alongside your team without the cost or commitment of full-time hires.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="0">
@@ -1067,7 +1076,7 @@
         </div>
         <div class="offer-card-bottom">
           <h3>Network</h3>
-          <p>We connect founders, mentors, investors, talent, and partners with a focus on trust and alignment.</p>
+          <p>Direct access to 800+ founders, operators, mentors, and investors across Europe's most active startup communities. The relationships that move companies forward.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="80">
@@ -1077,13 +1086,14 @@
         </div>
         <div class="offer-card-bottom">
           <h3>Events</h3>
-          <p>Fireside chats, peer groups, masterclasses, dinners, and studio open days boost founder growth.</p>
+          <p>Founder dinners, workshops, pitch nights, and curated gatherings designed to spark the connections and conversations that early-stage companies need most.</p>
         </div>
       </div>
       <div class="offer-card cta-card" data-reveal data-delay="160">
         <img src="project/assets/offer-cta-bg.png" alt="Campus" />
         <div class="offer-card-bottom">
-          <h3>Secure Your Spot</h3>
+          <h3>Spots Are Limited</h3>
+          <p style="color:rgba(255,255,255,0.55);font-size:13px;line-height:1.6;margin-bottom:20px;">Spots at The Delta are limited and selectively allocated. If you're building something serious, we'd like to hear about it.</p>
           <a class="btn btn-outline" href="#contact">Book a call</a>
         </div>
       </div>
@@ -1235,8 +1245,8 @@
 <!-- ============ CTA BANNER ============ -->
 <section class="cta-banner-wrap" id="contact">
   <div class="cta-banner" data-reveal>
-    <h2>Ready To Build Something Great?</h2>
-    <p>Whether you're looking for workspace, support for your venture, or want to join our ecosystem.</p>
+    <h2>Ready to Join Berlin's Most Connected Startup Campus?</h2>
+    <p>Whether you need a coworking desk, a private startup office, or full venture support, book a tour of The Delta Berlin.</p>
     <div class="hero-ctas" style="justify-content:center">
       <a class="btn btn-outline btn-lg" style="color:#131323;border-color:rgba(19,19,35,0.4);" href="#contact">Get in touch</a>
     </div>
