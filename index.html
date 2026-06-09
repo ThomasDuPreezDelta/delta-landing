@@ -55,10 +55,11 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent);
-    display: inline-block;
+    display: block;
+    margin-bottom: 16px;
   }
 
-  h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+  h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin-top: 0; }
 
   /* ============ NAV ============ */
   .nav {
@@ -110,15 +111,16 @@
     transition: transform 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease), color 200ms var(--ease);
   }
   .btn-white { background: #fff; color: #131323; }
-  .btn-white:hover { background: #e6e6e6; transform: translateY(-1px); }
+  .btn-white:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-1px); }
   .btn-purple { background: var(--accent); color: #fff; }
   .btn-purple:hover { background: #b300a0; transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.35); }
-  .btn-outline:hover { border-color: #fff; transform: translateY(-1px); }
+  .btn-outline { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.35); }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); transform: translateY(-1px); }
   .btn-lg { padding: 12px 26px; font-size: 14px; }
 
   /* ============ HERO ============ */
-  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+  .hero-viewport { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); flex: 1; min-height: 0; }
   .hero-bg {
     position: absolute;
     inset: 0;
@@ -137,7 +139,8 @@
     align-items: center;
     padding: 64px;
     width: 100%;
-    min-height: 85vh;
+    min-height: 0;
+    height: 100%;
   }
   .hero-text-col {
     flex: 1;
@@ -147,7 +150,7 @@
     font-size: 78px;
     font-weight: 400;
     line-height: 1.0;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     letter-spacing: -0.03em;
   }
   .hero h1 .accent { color: var(--accent); display: inline; font-weight: 400; }
@@ -272,13 +275,13 @@
     grid-template-columns: repeat(4, 1fr);
   }
   .stat {
-    padding: 48px 40px;
+    padding: 28px 40px;
     text-align: left;
     border-right: 1px solid rgba(255,255,255,0.08);
   }
   .stat:last-child { border-right: none; }
   .stat-num {
-    font-size: 72px;
+    font-size: 54px;
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 1;
@@ -917,7 +920,8 @@
   </div>
 </nav>
 
-<!-- ============ HERO ============ -->
+<!-- ============ HERO + STATS VIEWPORT ============ -->
+<div class="hero-viewport">
 <header class="hero" id="top">
   <div class="hero-bg">
     <video autoplay muted loop playsinline poster="project/assets/hero-bg.png">
@@ -926,8 +930,8 @@
   </div>
   <div class="hero-inner">
     <div class="hero-text-col">
-      <h1>We Build Europe's Top<br><span class="accent" id="typeTarget"></span><span class="type-cursor" id="typeCursor">|</span></h1>
-      <p class="hero-lede">A Berlin venture campus and ecosystem. Workspace, Studio, Services, Network, Events. Five pillars built around founders. The Delta Studio co-founds and funds high-impact companies alongside serial operators-partners.</p>
+      <h1>Berlin's Home<br>for Europe's Top<br><span class="accent"><span id="typeTarget">Venture Studios.</span><span class="type-cursor" id="typeCursor">|</span></span></h1>
+      <p class="hero-lede">The Delta co-builds high-impact companies across Europe's biggest startup cities. Home to 800+ founders, €1.5b+ raised, and everything a venture needs under one roof.</p>
       <div class="hero-ctas">
         <a class="btn btn-white btn-lg" href="#contact">Start Building With Us</a>
         <a class="btn btn-outline btn-lg" href="#contact">Contact us</a>
@@ -976,6 +980,7 @@
     </div>
   </div>
 </section>
+</div><!-- /.hero-viewport -->
 
 <!-- ============ PARTNERS ============ -->
 <section class="partners">
@@ -1005,7 +1010,7 @@
     <div class="launchpad-text">
       <div class="launchpad-top" data-reveal="left">
         <span class="launchpad-eyebrow">Exclusive Workspace</span>
-        <h2 class="launchpad-h2">A Launchpad<br>For Founders</h2>
+        <h2 class="launchpad-h2">Berlin's Home for Early-Stage Founders</h2>
       </div>
       <div class="launchpad-bottom" data-reveal="left">
         <p class="launchpad-sub" style="font-size:24px;margin:24px 0 0">The base of Berlin's top 1000 founders</p>
