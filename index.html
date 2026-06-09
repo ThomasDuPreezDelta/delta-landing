@@ -290,7 +290,7 @@
   }
   .stat-num .plus {
     font-size: 40px;
-    color: rgba(255,255,255,0.45);
+    color: #A1A1A7;
     font-weight: 400;
     vertical-align: super;
     margin-left: 2px;
@@ -315,7 +315,7 @@
     text-align: center;
     font-size: 13px;
     letter-spacing: 0;
-    color: rgba(255,255,255,0.5);
+    color: #A1A1A7;
     margin-bottom: 32px;
     font-weight: 400;
   }
@@ -408,7 +408,7 @@
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
+    color: #A1A1A7;
     margin-bottom: 20px;
   }
   .launchpad-h2 {
@@ -425,7 +425,7 @@
     margin-bottom: 6px;
   }
   .launchpad-body {
-    color: rgba(255,255,255,0.55);
+    color: #A1A1A7;
     font-size: 13px;
     max-width: 380px;
     margin-bottom: 16px;
@@ -501,15 +501,15 @@
   }
   .offer-card:hover .offer-arrow-icon {
     transform: rotate(-45deg);
-    color: var(--accent);
+    color: #fff;
   }
   .offer-card:hover .offer-arrow {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.18);
+    background: var(--accent);
+    border-color: var(--accent);
   }
   .offer-card-bottom { position: relative; z-index: 1; }
   .offer-card h3 { font-size: 32px; font-weight: 400; margin-bottom: 10px; color: #fff; }
-  .offer-card p { color: rgba(255,255,255,0.55); font-size: 16px; line-height: 1.6; }
+  .offer-card p { color: #A1A1A7; font-size: 16px; line-height: 1.6; }
   .offer-card.cta-card {
     position: relative;
     overflow: hidden;
@@ -650,12 +650,12 @@
   .tab-arrow-icon {
     display: inline-block;
     font-size: 16px;
-    color: rgba(255,255,255,0.5);
+    color: #A1A1A7;
     transition: transform 500ms cubic-bezier(0.2,0.7,0.2,1), color 500ms cubic-bezier(0.2,0.7,0.2,1);
   }
   .tab.active .tab-arrow-icon,
-  .tab:hover .tab-arrow-icon { transform: rotate(-45deg); color: var(--accent); }
-  .tab:hover .tab-arrow-box { background: rgba(255,255,255,0.08); }
+  .tab:hover .tab-arrow-icon { transform: rotate(-45deg); color: #fff; }
+  .tab:hover .tab-arrow-box { background: var(--accent); border-color: var(--accent); }
   .tab-desc-wrap {
     display: grid;
     grid-template-rows: 0fr;
@@ -724,9 +724,9 @@
   /* ============ TRUSTED BY LEADERS ============ */
   .leaders-section { background: #131323; }
   .leaders-head { margin-bottom: 40px; }
-  .leaders-head .eyebrow { margin-bottom: 12px; display: block; color: rgba(255,255,255,0.45); }
+  .leaders-head .eyebrow { margin-bottom: 12px; display: block; color: #A1A1A7; }
   .leaders-head h2 { font-size: 48px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 14px; }
-  .leaders-head p { color: rgba(255,255,255,0.55); max-width: 380px; font-size: 13px; line-height: 1.6; }
+  .leaders-head p { color: #A1A1A7; max-width: 560px; font-size: 13px; line-height: 1.6; }
   .leaders-grid {
     display: flex;
     flex-direction: column;
@@ -776,21 +776,23 @@
     line-height: 1.55;
     margin-bottom: 14px;
   }
-  .leader-person-name { font-size: 14px; color: rgba(255,255,255,0.45); }
+  .leader-person-name { font-size: 14px; color: #A1A1A7; }
 
   /* ============ LATEST POSTS ============ */
   .posts-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
-  .post-card { background: transparent; overflow: hidden; }
-  .post-photo { height: 480px; overflow: hidden; border-radius: 4px; }
+  .post-card { background: transparent; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+  .post-photo { height: 260px; overflow: hidden; border-radius: 0; }
   .post-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .post-body { padding: 18px 0 0; }
-  .post-tag { font-size: 14px; font-weight: 600; color: #fff; display: block; margin-bottom: 8px; }
-  .post-title { font-size: 15px; font-weight: 400; margin: 0 0 8px; color: rgba(255,255,255,0.85); }
-  .post-excerpt { color: rgba(255,255,255,0.5); font-size: 13px; }
+  .post-body { padding: 24px; }
+  .post-tag { display: none; }
+  .post-title { font-size: 32px; font-weight: 400; margin: 0 0 12px; color: #fff; line-height: 1.2; }
+  .post-excerpt { color: #A1A1A7; font-size: 16px; line-height: 1.6; margin-bottom: 24px; }
+  .post-cta { display: inline-block; padding: 8px 18px; border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 13px; border-radius: 2px; text-decoration: none; transition: background 200ms, border-color 200ms; }
+  .post-cta:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.6); }
   .posts-foot { text-align: center; margin-top: 48px; }
 
   /* ============ CTA BANNER ============ */
@@ -824,7 +826,7 @@
     padding-bottom: 64px;
   }
   .footer-brand img { height: 56px; width: auto; margin-bottom: 24px; display: block; }
-  .footer-brand p { color: rgba(255,255,255,0.45); max-width: 220px; font-size: 14px; line-height: 1.6; }
+  .footer-brand p { color: #A1A1A7; max-width: 220px; font-size: 14px; line-height: 1.6; }
   .footer-col h4 {
     font-size: 15px;
     font-style: italic;
@@ -833,7 +835,7 @@
     margin-bottom: 22px;
   }
   .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 13px; }
-  .footer-col a { font-size: 13.5px; color: rgba(255,255,255,0.45); transition: color 200ms var(--ease); }
+  .footer-col a { font-size: 13.5px; color: #A1A1A7; transition: color 200ms var(--ease); }
   .footer-col a:hover { color: rgba(255,255,255,0.9); }
   .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.08);
@@ -931,7 +933,7 @@
   <div class="hero-inner">
     <div class="hero-text-col">
       <h1>Berlin's Home<br>for Europe's Top<br><span class="accent"><span id="typeTarget">Venture Studios.</span><span class="type-cursor" id="typeCursor">|</span></span></h1>
-      <p class="hero-lede">The Delta co-builds high-impact companies across Europe's biggest startup cities. Home to 800+ founders, €1.5b+ raised, and everything a venture needs under one roof.</p>
+      <p class="hero-lede" style="font-size:20px">The Delta co-builds high-impact companies across Europe's biggest startup cities. Home to 800+ founders, €1.5b+ raised, and everything a venture needs under one roof.</p>
       <div class="hero-ctas">
         <a class="btn btn-white btn-lg" href="#contact">Start Building With Us</a>
         <a class="btn btn-outline btn-lg" href="#contact">Contact us</a>
@@ -1028,7 +1030,7 @@
 <section class="section" id="offerings">
   <div class="container">
     <div class="section-head" data-reveal>
-      <span class="eyebrow" style="color:rgba(255,255,255,0.45)">Exclusive Workspace</span>
+      <span class="eyebrow" style="color:#A1A1A7">Exclusive Workspace</span>
       <h2 style="font-size:64px;font-weight:400">Access To Everything<br>A Founder Needs</h2>
     </div>
     <div class="offer-grid">
@@ -1039,7 +1041,7 @@
         </div>
         <div class="offer-card-bottom">
           <h3>Workspace</h3>
-          <p>A curated workspace with coworking, private offices, wellness, and event spaces for all building members.</p>
+          <p>A curated campus where founders and their teams can focus, collaborate, and grow. With flexible desks, private offices, and meeting spaces built for startups.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="80">
@@ -1049,7 +1051,7 @@
         </div>
         <div class="offer-card-bottom">
           <h3>Studio</h3>
-          <p>A hands-on studio providing capital, mentorship, and experienced operators from day one.</p>
+          <p>A hands-on venture studio where we co-build companies from day one. Providing the structure, resources, and expertise to turn ideas into investable businesses.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="160">
@@ -1059,7 +1061,7 @@
         </div>
         <div class="offer-card-bottom">
           <h3>Services</h3>
-          <p>Embedded teams work alongside your venture to validate, build, and scale without the cost of full-time hires.</p>
+          <p>Embedded venture experts across legal, finance, marketing, and product. Working alongside your team without the cost or commitment of full-time hires.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="0">
@@ -1069,7 +1071,7 @@
         </div>
         <div class="offer-card-bottom">
           <h3>Network</h3>
-          <p>We connect founders, mentors, investors, talent, and partners with a focus on trust and alignment.</p>
+          <p>Direct access to 800+ founders, operators, mentors, and investors across Europe's most active startup communities. The relationships that move companies forward.</p>
         </div>
       </div>
       <div class="offer-card" data-reveal data-delay="80">
@@ -1079,7 +1081,7 @@
         </div>
         <div class="offer-card-bottom">
           <h3>Events</h3>
-          <p>Fireside chats, peer groups, masterclasses, dinners, and studio open days boost founder growth.</p>
+          <p>Founder dinners, workshops, pitch nights, and curated gatherings designed to spark the connections and conversations that early-stage companies need most.</p>
         </div>
       </div>
       <div class="offer-card cta-card" data-reveal data-delay="160">
@@ -1180,7 +1182,7 @@
         </div>
         <div class="leader-col quote">
           <div>
-            <p class="leader-quote-text">&ldquo;Each campus is designed to provide an end-to-end platform, where founders can access everything they need to transform themselves and their ventures&rdquo;</p>
+            <p class="leader-quote-text" style="font-size:24px">&ldquo;Each campus is designed to provide an end-to-end platform, where founders can access everything they need to transform themselves and their ventures&rdquo;</p>
             <div class="leader-person-name">Louis Buys</div>
           </div>
         </div>
@@ -1188,7 +1190,7 @@
       <div class="leader-card card-2">
         <div class="leader-col quote">
           <div>
-            <p class="leader-quote-text">&ldquo;Each campus is designed to provide an end-to-end platform, where founders can access everything they need to transform themselves and their ventures&rdquo;</p>
+            <p class="leader-quote-text" style="font-size:24px">&ldquo;Each campus is designed to provide an end-to-end platform, where founders can access everything they need to transform themselves and their ventures&rdquo;</p>
             <div class="leader-person-name">Louis Buys</div>
           </div>
         </div>
@@ -1212,24 +1214,32 @@
     </div>
     <div class="posts-grid" data-reveal>
       <article class="post-card">
-        <div class="post-photo"><img src="project/assets/post-building.jpg" alt="The Delta campus" /></div>
+        <div class="post-photo"><img src="project/assets/post-building.jpg" alt="Startup Spotlight" /></div>
         <div class="post-body">
-          <span class="post-tag" style="font-size:24px">Network</span>
-          <h3 class="post-title">We connect founders, mentors, investors and talent</h3>
-          <p class="post-excerpt">We connect founders, mentors, investors, talent, and partners with a focus on trust and alignment.</p>
+          <h3 class="post-title">Startup Spotlight</h3>
+          <p class="post-excerpt">Discover how emerging startups are reshaping the tech landscape with innovative solutions and bold ideas.</p>
+          <a class="post-cta" href="#">Read the article</a>
         </div>
       </article>
       <article class="post-card">
-        <div class="post-photo"><img src="project/assets/post-building.jpg" alt="The Delta campus" /></div>
+        <div class="post-photo"><img src="project/assets/post-building.jpg" alt="Innovation Hub" /></div>
         <div class="post-body">
-          <span class="post-tag" style="font-size:24px">Network</span>
-          <h3 class="post-title">We connect founders, mentors, investors and talent</h3>
-          <p class="post-excerpt">We connect founders, mentors, investors, talent, and partners with a focus on trust and alignment.</p>
+          <h3 class="post-title">Innovation Hub</h3>
+          <p class="post-excerpt">Inside the latest trends driving startup growth and investment opportunities worldwide.</p>
+          <a class="post-cta" href="#">View</a>
+        </div>
+      </article>
+      <article class="post-card">
+        <div class="post-photo"><img src="project/assets/post-building.jpg" alt="Founders' Forum" /></div>
+        <div class="post-body">
+          <h3 class="post-title">Founders' Forum</h3>
+          <p class="post-excerpt">Insights from top entrepreneurs on navigating challenges and scaling new ventures successfully.</p>
+          <a class="post-cta" href="#">Read the article</a>
         </div>
       </article>
     </div>
     <div class="posts-foot">
-      <a class="btn btn-outline btn-lg" href="#">View all posts</a>
+      <a class="btn btn-white btn-lg" href="#">View all articles</a>
     </div>
   </div>
 </section>
@@ -1237,8 +1247,8 @@
 <!-- ============ CTA BANNER ============ -->
 <section class="cta-banner-wrap" id="contact">
   <div class="cta-banner" data-reveal>
-    <h2>Ready To Build Something Great?</h2>
-    <p>Whether you're looking for workspace, support for your venture, or want to join our ecosystem.</p>
+    <h2>Ready to Join Berlin's Most Connected Startup Campus?</h2>
+    <p>Whether you need a coworking desk, a private startup office, or full venture support, book a tour of The Delta Berlin.</p>
     <div class="hero-ctas" style="justify-content:center">
       <a class="btn btn-outline btn-lg" style="color:#131323;border-color:rgba(19,19,35,0.4);" href="#contact">Get in touch</a>
     </div>
@@ -1254,7 +1264,7 @@
         <p>An ecosystem that helps founders solve the world's biggest problems.</p>
       </div>
       <div class="footer-col">
-        <h4>Offerings</h4>
+        <h4 style="font-size:20px">Offerings</h4>
         <ul>
           <li><a href="#">Product Strategy</a></li>
           <li><a href="#">Brand Design</a></li>
@@ -1267,7 +1277,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>The Delta Pillars</h4>
+        <h4 style="font-size:20px">The Delta Pillars</h4>
         <ul>
           <li><a href="#">Studio</a></li>
           <li><a href="#">Services</a></li>
@@ -1277,7 +1287,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Resources</h4>
+        <h4 style="font-size:20px">Resources</h4>
         <ul>
           <li><a href="#">About</a></li>
           <li><a href="#">Case studies</a></li>
