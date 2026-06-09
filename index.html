@@ -427,7 +427,7 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #A1A1A7;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .launchpad-h2 {
     font-size: 64px;
@@ -510,7 +510,7 @@
     border: 1px solid rgba(255,255,255,0.18);
     transition: background 500ms cubic-bezier(0.2,0.7,0.2,1), border-color 500ms cubic-bezier(0.2,0.7,0.2,1), color 500ms cubic-bezier(0.2,0.7,0.2,1);
     flex: none;
-    color: rgba(255,255,255,0.4);
+    color: #A1A1A7;
   }
   .offer-arrow-icon {
     display: inline-block;
@@ -557,7 +557,7 @@
 
   /* ============ QUOTE ============ */
   .quote-section {
-    background: #1F1F2E;
+    background: #F5F7FF;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
     border-image: linear-gradient(to right, #E300CC 0%, #9F5AC5 53%, #8090AB 80%, #52C2BC 100%) 1;
@@ -576,37 +576,22 @@
   }
   .quote-portrait {
     width: 320px;
-    height: 323px;
+    height: 360px;
     overflow: hidden;
     flex: none;
     position: relative;
+    background: #F5F7FF;
   }
-  .quote-blob {
-    position: absolute;
-    top: 0; left: 0;
-    z-index: 0;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(227,0,204,0.85) 0%, rgba(227,0,204,0.35) 45%, transparent 70%);
-    filter: blur(28px);
-    pointer-events: none;
-    animation: blobDrift 16s ease-in-out infinite;
-  }
+  .quote-blob { display: none; }
   @keyframes blobDrift {
-    0%   { transform: translate(10px, 10px); }
-    15%  { transform: translate(90px, 5px); }
-    30%  { transform: translate(110px, 50px); }
-    45%  { transform: translate(90px, 105px); }
-    60%  { transform: translate(40px, 108px); }
-    72%  { transform: translate(12px, 70px); }
-    85%  { transform: translate(55px, 40px); }
-    100% { transform: translate(10px, 10px); }
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(0, 0); }
   }
   .quote-portrait img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center top;
+    object-fit: contain;
+    object-position: center bottom;
     display: block;
     position: relative;
     z-index: 1;
@@ -617,11 +602,11 @@
     font-weight: 400;
     font-style: italic;
     line-height: 1.45;
-    color: #fff;
+    color: #131323;
     margin-bottom: 24px;
     max-width: 680px;
   }
-  .quote-name { font-weight: 400; font-size: 14px; color: rgba(255,255,255,0.65); }
+  .quote-name { font-weight: 400; font-size: 14px; color: rgba(19,19,35,0.55); }
 
   /* ============ GET INVOLVED ============ */
   .involved-head { margin-bottom: 56px; text-align: center; }
@@ -690,6 +675,7 @@
     padding-top: 4px;
   }
   .tab.active .tab-desc { opacity: 1; }
+  .tab-btn { display: inline-block; margin-top: 20px; font-size: 13px; padding: 10px 20px; }
   .tab-glow { display: none; }
   .tab:not(.active):hover {
     background: radial-gradient(ellipse 130% 120% at 105% -5%, rgba(180,20,155,0.28) 0%, rgba(140,10,120,0.12) 45%, transparent 75%);
@@ -742,7 +728,7 @@
   /* ============ TRUSTED BY LEADERS ============ */
   .leaders-section { background: #131323; }
   .leaders-head { margin-bottom: 40px; }
-  .leaders-head .eyebrow { margin-bottom: 12px; display: block; color: #A1A1A7; }
+  .leaders-head .eyebrow { margin-bottom: 16px; display: block; color: #A1A1A7; }
   .leaders-head h2 { font-size: 48px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 14px; }
   .leaders-head p { color: #A1A1A7; max-width: 560px; font-size: 13px; line-height: 1.6; }
   .leaders-grid {
@@ -753,7 +739,7 @@
   .leader-card {
     display: grid;
     gap: 16px;
-    border-radius: 4px;
+    border-radius: 0;
     min-height: 120px;
   }
   .leader-card.card-1 { grid-template-columns: 1fr 1.2fr 1.8fr; }
@@ -765,12 +751,12 @@
     padding: 32px;
     background: #1a1a2e;
     border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 4px;
+    border-radius: 0;
   }
   .leader-col.logo { background: #1F1F2E; justify-content: center; align-items: center; }
   .leader-col.logo span { display: flex; align-items: center; justify-content: center; width: 100%; }
   .leader-col.logo img { max-width: 130px; max-height: 44px; object-fit: contain; display: block; margin: 0 auto; }
-  .leader-col.photo { padding: 0; overflow: hidden; background: #0f0f1f; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; }
+  .leader-col.photo { padding: 0; overflow: hidden; background: #0f0f1f; border: 1px solid rgba(255,255,255,0.1); border-radius: 0; }
   .leader-col.photo img {
     width: 100%;
     height: 100%;
@@ -815,7 +801,7 @@
 
   /* ============ CTA BANNER ============ */
   .cta-banner-wrap {
-    background: #eeeef5;
+    background: #eeeef5 url('project/assets/cta-bg.png') center center / cover no-repeat;
     border-top: 6px solid transparent;
     border-bottom: 6px solid transparent;
     border-image: linear-gradient(to right, #E300CC 0%, #9F5AC5 53%, #8090AB 80%, #52C2BC 100%) 1;
@@ -1030,9 +1016,9 @@
   <div class="hero-inner">
     <div class="hero-text-col">
       <h1>Berlin's Home<br>for Europe's Top<br><span class="accent"><span id="typeTarget">Venture Studios.</span><span class="type-cursor" id="typeCursor">|</span></span></h1>
-      <p class="hero-lede" style="font-size:20px">The Delta co-builds high-impact companies across Europe's biggest startup cities. Home to 800+ founders, €1.5b+ raised, and everything a venture needs under one roof.</p>
+      <p class="hero-lede" style="font-size:20px;color:rgb(202,202,202)">The Delta co-builds high-impact companies across Europe's biggest startup cities. Home to 800+ founders, €1.5b+ raised, and everything a venture needs under one roof.</p>
       <div class="hero-ctas">
-        <a class="btn btn-white btn-lg" href="#contact">Start Building With Us</a>
+        <a class="btn btn-white btn-lg" href="#contact">Speak with us</a>
         <a class="btn btn-outline btn-lg" href="#contact">Contact us</a>
       </div>
     </div>
@@ -1184,8 +1170,8 @@
       <div class="offer-card cta-card" data-reveal data-delay="160">
         <img src="project/assets/offer-cta-bg.png" alt="Campus" />
         <div class="offer-card-bottom">
-          <h3>Spots Are Limited</h3>
-          <a class="btn btn-outline" href="#contact">Start Building With Us</a>
+          <h3 style="font-size:32px">Spots Are Limited</h3>
+          <a class="btn btn-outline" href="#contact">Speak with us</a>
         </div>
       </div>
     </div>
@@ -1193,11 +1179,11 @@
 </section>
 
 <!-- ============ QUOTE ============ -->
-<section class="quote-section" style="border-width:4px 0px 6px">
+<section class="quote-section" style="border-width:6px 0px 6px">
   <div class="quote-grid">
     <div class="quote-portrait" data-reveal="left">
       <div class="quote-blob"></div>
-      <img src="project/assets/portrait-louis.png" alt="Louis Buys" />
+      <img src="project/assets/testimonial-person.png" alt="Louis Buys" />
     </div>
     <div class="quote-body" data-reveal="right">
       <p class="quote-text">"Each campus is designed to provide an end-to-end platform, where founders can access everything they need to transform themselves and their ventures"</p>
@@ -1216,40 +1202,44 @@
       <div class="tabs" data-reveal="left">
         <button class="tab active" data-tab data-img="project/assets/involved-photo.jpg"
           data-stats='[{"num":"300+","lbl":"Founders in our network"},{"num":"47","lbl":"Ventures launched"},{"num":"€1.5b","lbl":"Raised by our ventures"}]'>
+          <div class="tab-glow"></div>
           <div class="tab-top">
-            <span class="tab-title">For <span class="tab-name">Founders</span></span>
+            <span class="tab-title" style="font-size:32px">For <span class="tab-name">Founders</span></span>
             <span class="tab-arrow-box"><span class="tab-arrow-icon">→</span></span>
           </div>
-          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">A Berlin venture campus and ecosystem. Workspace, Studio, Services, Network, Events. Five pillars built around founders.</p></div></div>
+          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">A Berlin venture campus and ecosystem. Workspace, Studio, Services, Network, Events. Five pillars built around founders.</p><a class="btn btn-outline tab-btn" href="#contact">Find out more</a></div></div>
         </button>
         <button class="tab" data-tab data-img="project/assets/involved-photo.jpg"
           data-stats='[{"num":"60+","lbl":"Mentors on the network"},{"num":"12","lbl":"Industries covered"},{"num":"200+","lbl":"Sessions delivered"}]'>
+          <div class="tab-glow"></div>
           <div class="tab-top">
-            <span class="tab-title">For <span class="tab-name">Mentors</span></span>
+            <span class="tab-title" style="font-size:32px">For <span class="tab-name">Mentors</span></span>
             <span class="tab-arrow-box"><span class="tab-arrow-icon">→</span></span>
           </div>
-          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">Share your operating experience with the next generation of founders and shape the ventures of tomorrow.</p></div></div>
+          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">Share your operating experience with the next generation of founders and shape the ventures of tomorrow.</p><a class="btn btn-outline tab-btn" href="#contact">Find out more</a></div></div>
         </button>
         <button class="tab" data-tab data-img="project/assets/involved-photo.jpg"
           data-stats='[{"num":"80+","lbl":"Active investors"},{"num":"€200k","lbl":"Avg. inception ticket"},{"num":"25+","lbl":"Deals closed"}]'>
+          <div class="tab-glow"></div>
           <div class="tab-top">
-            <span class="tab-title">For <span class="tab-name">Investors</span></span>
+            <span class="tab-title" style="font-size:32px">For <span class="tab-name">Investors</span></span>
             <span class="tab-arrow-box"><span class="tab-arrow-icon">→</span></span>
           </div>
-          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">Get early access to a curated pipeline of high-conviction, studio-backed ventures across Europe.</p></div></div>
+          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc" style="padding:0px">Get early access to a curated pipeline of high-conviction, studio-backed ventures across Europe.</p><a class="btn btn-outline tab-btn" href="#contact">Find out more</a></div></div>
         </button>
         <button class="tab" data-tab data-img="project/assets/involved-photo.jpg"
           data-stats='[{"num":"40+","lbl":"Campus partners"},{"num":"15","lbl":"Countries represented"},{"num":"5","lbl":"Campuses planned"}]'>
+          <div class="tab-glow"></div>
           <div class="tab-top">
-            <span class="tab-title">For <span class="tab-name">Partners</span></span>
+            <span class="tab-title" style="font-size:32px">For <span class="tab-name">Partners</span></span>
             <span class="tab-arrow-box"><span class="tab-arrow-icon">→</span></span>
           </div>
-          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">Partner with the campus to reach ambitious founders and embed your services in the ecosystem.</p></div></div>
+          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">Partner with the campus to reach ambitious founders and embed your services in the ecosystem.</p><a class="btn btn-outline tab-btn" href="#contact">Find out more</a></div></div>
         </button>
       </div>
       <div class="involved-card" data-reveal="right">
         <div class="involved-photo">
-          <img src="project/assets/involved-photo.jpg" alt="Founders collaborating" id="involvedPhoto" />
+          <img src="project/assets/involved-photo.jpg" alt="Founders collaborating" />
         </div>
         <div class="involved-stats">
           <div class="involved-stat"><div class="num">300+</div><div class="lbl">Founders in our network</div></div>
@@ -1267,7 +1257,7 @@
     <div class="leaders-head" data-reveal>
       <span class="eyebrow">Industry Experts</span>
       <h2 style="font-size:64px">Trusted By Leaders</h2>
-      <p>Our vision is to accelerate, and back the top 1,000 founders in each of Africa &amp; Europe's biggest startup capitals, starting with Berlin.</p>
+      <p style="font-size:16px">Our vision is to accelerate, and back the top 1,000 founders in each of Africa &amp; Europe's biggest startup capitals, starting with Berlin.</p>
     </div>
     <div class="leaders-grid" data-reveal>
       <div class="leader-card card-1">
@@ -1530,7 +1520,7 @@
 
   // Get Involved — tab toggle + stats/image swap
   (function () {
-    var photo = document.getElementById('involvedPhoto');
+    var photo = document.querySelector('.involved-photo img');
     var statEls = document.querySelectorAll('.involved-stat');
 
     function updateCard(tab) {
