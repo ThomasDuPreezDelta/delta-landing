@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Investors | The Delta Apex Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg:#131323;--accent:#E300CC;--text:#ffffff;--muted:#888888;--muted-2:#aaaaaa;--border:rgba(255,255,255,0.08);--ease:cubic-bezier(0.2,0.7,0.2,1); }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  ::selection{background:var(--accent);color:#fff;}
+  .container{max-width:1240px;margin:0 auto;padding:0 40px;}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:16px;}
+  .eyebrow-accent{color:var(--accent);}
+
+  /* NAV */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;}
+  .nav-inner{height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;background:rgba(19,19,35,0.6);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:0 28px;border:1px solid rgba(255,255,255,0.07);}
+  .nav-logo img{height:auto;width:110px;}
+  .nav-links{display:flex;align-items:center;gap:32px;list-style:none;}
+  .nav-links>li{position:relative;}
+  .nav-links a{font-size:15px;color:var(--muted-2);transition:color 200ms var(--ease);}
+  .nav-links a:hover,.nav-links a.active{color:var(--text);}
+  .nav-trigger{display:inline-flex;align-items:center;gap:6px;cursor:pointer;}
+  .nav-caret{width:10px;height:10px;flex:none;transition:transform 300ms var(--ease);}
+  .nav-caret path{stroke:currentColor;}
+  .nav.mega-open .nav-caret{transform:rotate(180deg);}
+  .nav-mega{position:absolute;top:calc(100% - 4px);left:40px;right:40px;background:#F5F7FF;border:1px solid rgba(19,19,35,0.10);display:grid;grid-template-columns:minmax(200px,1fr) 3fr 1fr;gap:0;padding:26px;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(6px);transition:opacity 300ms var(--ease),transform 300ms var(--ease),visibility 300ms var(--ease);z-index:90;}
+  .nav.mega-open .nav-mega{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0);}
+  .nav-mega-frame{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(19,19,35,0.13);}
+  .nav-mega-col{padding:28px 32px 40px;}
+  .nav-mega-frame .nav-mega-col{border-right:1px solid rgba(19,19,35,0.13);}
+  .nav-mega-frame .nav-mega-col:last-child{border-right:none;}
+  .nav-mega-side{display:flex;flex-direction:column;border:1px solid rgba(19,19,35,0.13);border-left:none;}
+  .nav-mega-side .nav-mega-group{padding:28px 28px 36px;}
+  .nav-mega-side .nav-mega-group+.nav-mega-group{border-top:1px solid rgba(19,19,35,0.13);}
+  .nav-mega-promo{position:relative;overflow:hidden;min-height:420px;min-width:200px;}
+  .nav-mega-promo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .nav-mega-label{font-size:14px;color:rgba(19,19,35,0.42);margin-bottom:24px;font-weight:400;}
+  .nav-mega-list{display:flex;flex-direction:column;gap:4px;list-style:none;padding:0;margin:0;}
+  .nav-mega-list a{display:flex;align-items:center;font-size:15px;color:#131323;padding:10px 14px;margin:0 -14px;border:1px solid transparent;transition:color 180ms var(--ease),border-color 240ms var(--ease);}
+  .nav-mega-list a::after{content:"→";margin-left:auto;padding-left:16px;color:var(--accent);opacity:0;transform:translateX(-10px);transition:opacity 240ms var(--ease),transform 240ms var(--ease);}
+  .nav-mega-list a:hover{color:var(--accent);border-color:rgba(19,19,35,0.16);}
+  .nav-mega-list a:hover::after{opacity:1;transform:translateX(0);}
+  .nav-mega-list a.active-page{color:var(--accent);font-weight:600;}
+  .nav-mega-list a.is-disabled{color:rgba(19,19,35,0.35);pointer-events:none;}
+  .nav-mega-list a.is-disabled::after{content:none;}
+  .nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:none;border:none;cursor:pointer;flex:none;}
+  .nav-burger span{display:block;width:22px;height:2px;background:#fff;transition:transform 220ms var(--ease),opacity 180ms var(--ease);}
+  .nav.menu-open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav.menu-open .nav-burger span:nth-child(2){opacity:0;}
+  .nav.menu-open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{display:none;flex-direction:column;margin:8px 0 0;padding:12px;background:rgba(19,19,35,0.96);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.07);}
+  .mobile-menu a{padding:14px 16px;font-size:16px;color:var(--muted-2);transition:background 180ms var(--ease);}
+  .mobile-menu a:not(.btn):hover{background:rgba(255,255,255,0.06);}
+  .mobile-menu a.btn{justify-content:center;margin-top:8px;}
+  .nav.menu-open .mobile-menu{display:flex;}
+  @media(max-width:768px){.nav{padding:12px 16px;}.nav-links{display:none;}.nav-cta-desktop{display:none;}.nav-burger{display:flex;}}
+
+  /* BUTTONS */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-size:13px;font-weight:600;border:none;cursor:pointer;border-radius:0;padding:8px 20px;transition:transform 200ms var(--ease),background 200ms var(--ease),border-color 200ms var(--ease),color 200ms var(--ease);}
+  .btn-white{background:#fff;color:#131323;}
+  .btn-white:hover{background:var(--accent);color:#fff;transform:translateY(-1px);}
+  .btn-outline{background:rgba(255,255,255,0.05);color:#fff;border:1px solid rgba(255,255,255,0.35);}
+  .btn-outline:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.7);transform:translateY(-1px);}
+  .btn-lg{padding:13px 28px;font-size:14px;}
+
+  /* HERO */
+  .hero{position:relative;min-height:60vh;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--border);padding-top:100px;}
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .hero-bg video,.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to right,rgba(19,19,35,0.96) 40%,rgba(19,19,35,0.5) 100%);}
+  .hero-inner{position:relative;z-index:1;padding:80px 40px;width:100%;max-width:1240px;margin:0 auto;}
+  .hero-pill{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);background:rgba(227,0,204,0.12);border:1px solid rgba(227,0,204,0.28);padding:5px 14px;margin-bottom:24px;}
+  .hero h1{font-size:64px;font-weight:400;line-height:1.05;letter-spacing:-0.03em;max-width:760px;margin-bottom:20px;}
+  .hero h1 strong{font-weight:700;}
+  .hero-sub{font-size:18px;color:var(--muted-2);max-width:520px;margin-bottom:36px;line-height:1.55;}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+
+  /* SECTIONS */
+  .section{padding:96px 0;}
+  .section-alt{background:#0f0f1f;}
+  .section-head{max-width:600px;margin-bottom:56px;}
+  .section-head.centered{text-align:center;margin-left:auto;margin-right:auto;}
+  .section-head h2{font-size:44px;font-weight:400;letter-spacing:-0.02em;line-height:1.1;margin-bottom:16px;}
+  .section-head p{color:var(--muted-2);font-size:17px;line-height:1.6;}
+
+  /* STATS ROW */
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);}
+  .stat-cell{padding:32px 28px;border-right:1px solid var(--border);text-align:center;}
+  .stat-cell:last-child{border-right:none;}
+  .stat-num{font-size:48px;font-weight:400;letter-spacing:-0.03em;line-height:1;color:#fff;margin-bottom:8px;}
+  .stat-label{font-size:14px;color:var(--muted-2);}
+
+  /* BENEFITS */
+  .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);}
+  .benefit-card{padding:32px 28px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background 400ms var(--ease);}
+  .benefit-card:nth-child(3n){border-right:none;}
+  .benefit-card:nth-last-child(-n+3){border-bottom:none;}
+  .benefit-card:hover{background:radial-gradient(ellipse 140% 120% at 110% -5%,rgba(227,0,204,0.18) 0%,transparent 70%);}
+  .benefit-icon{width:36px;height:36px;margin-bottom:20px;display:flex;align-items:center;justify-content:center;}
+  .benefit-icon svg{width:24px;height:24px;stroke:var(--accent);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  .benefit-card h3{font-size:18px;font-weight:600;margin-bottom:8px;letter-spacing:-0.01em;}
+  .benefit-card p{color:var(--muted-2);font-size:15px;line-height:1.6;}
+
+  /* APEX TIERS */
+  .apex-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);}
+  .apex-card{padding:40px 32px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:0;}
+  .apex-card:last-child{border-right:none;}
+  .apex-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);background:rgba(227,0,204,0.1);border:1px solid rgba(227,0,204,0.25);padding:4px 12px;margin-bottom:20px;}
+  .apex-card h3{font-size:24px;font-weight:600;letter-spacing:-0.02em;margin-bottom:12px;}
+  .apex-card p{color:var(--muted-2);font-size:15px;line-height:1.6;flex:1;margin-bottom:24px;}
+  .apex-features{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .apex-features li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted-2);}
+  .apex-features li::before{content:"✓";color:var(--accent);flex:none;font-weight:700;}
+
+  /* FAQ */
+  .faq-list{display:flex;flex-direction:column;border:1px solid var(--border);}
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-item:last-child{border-bottom:none;}
+  .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;background:none;border:none;color:var(--text);font-family:inherit;font-size:17px;font-weight:500;text-align:left;cursor:pointer;transition:color 180ms var(--ease);}
+  .faq-q:hover{color:var(--accent);}
+  .faq-chevron{width:20px;height:20px;flex:none;transition:transform 300ms var(--ease);}
+  .faq-chevron path{stroke:currentColor;}
+  .faq-item.open .faq-chevron{transform:rotate(180deg);}
+  .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows 380ms var(--ease);}
+  .faq-item.open .faq-a{grid-template-rows:1fr;}
+  .faq-a-inner{overflow:hidden;}
+  .faq-a-inner p{padding:0 28px 24px;color:var(--muted-2);font-size:15px;line-height:1.7;}
+
+  /* CTA */
+  .cta-section{background:#F5F7FF;padding:96px 40px;text-align:center;}
+  .cta-section h2{font-size:44px;font-weight:400;letter-spacing:-0.02em;color:#131323;margin-bottom:16px;line-height:1.15;}
+  .cta-section h2 strong{font-weight:700;}
+  .cta-section p{color:rgba(19,19,35,0.6);font-size:17px;max-width:480px;margin:0 auto 36px;line-height:1.6;}
+  .cta-btn-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .btn-dark-cta{background:#131323;color:#fff;border:none;}
+  .btn-dark-cta:hover{background:var(--accent);transform:translateY(-1px);}
+  .btn-outline-dark{background:transparent;color:#131323;border:1px solid rgba(19,19,35,0.3);}
+  .btn-outline-dark:hover{border-color:#131323;transform:translateY(-1px);}
+
+  /* FOOTER */
+  .footer{background:#0d0d1e;border-top:1px solid var(--border);padding:64px 0 32px;}
+  .footer-top{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:48px;padding-bottom:48px;border-bottom:1px solid var(--border);margin-bottom:32px;}
+  .footer-brand img{width:100px;margin-bottom:16px;}
+  .footer-brand p{color:var(--muted);font-size:14px;line-height:1.6;max-width:240px;}
+  .footer-col h4{font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:20px;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .footer-col ul a{font-size:14px;color:var(--muted);transition:color 180ms var(--ease);}
+  .footer-col ul a:hover{color:#fff;}
+  .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .footer-bottom-left{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+  .footer-bottom-left span{font-size:13px;color:var(--muted);}
+  .footer-bottom-left .links{display:flex;gap:16px;}
+  .footer-bottom-left .links a{font-size:13px;color:var(--muted);transition:color 180ms var(--ease);}
+  .footer-bottom-left .links a:hover{color:#fff;}
+  .footer-socials{display:flex;gap:10px;}
+  .footer-social-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.1);color:var(--muted);transition:border-color 180ms var(--ease),color 180ms var(--ease);}
+  .footer-social-btn:hover{border-color:rgba(255,255,255,0.4);color:#fff;}
+  .footer-social-btn svg{width:16px;height:16px;fill:currentColor;stroke:none;}
+
+  /* REVEAL */
+  [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity 560ms var(--ease),transform 560ms var(--ease);}
+  [data-reveal].is-visible{opacity:1;transform:none;}
+
+  @media(max-width:900px){
+    .hero h1{font-size:44px;}
+    .stats-row{grid-template-columns:repeat(2,1fr);}
+    .stat-cell:nth-child(2){border-right:none;}
+    .stat-cell:nth-child(1),.stat-cell:nth-child(2){border-bottom:1px solid var(--border);}
+    .benefits-grid{grid-template-columns:repeat(2,1fr);}
+    .benefit-card:nth-child(3n){border-right:1px solid var(--border);}
+    .benefit-card:nth-child(2n){border-right:none;}
+    .apex-grid{grid-template-columns:1fr;}
+    .apex-card{border-right:none;border-bottom:1px solid var(--border);}
+    .apex-card:last-child{border-bottom:none;}
+    .footer-top{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:600px){
+    .hero h1{font-size:36px;}
+    .benefits-grid{grid-template-columns:1fr;}
+    .benefit-card{border-right:none;}
+    .section-head h2{font-size:32px;}
+    .cta-section h2{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="container nav-inner">
+    <a class="nav-logo" href="index.html"><img src="project/assets/logo-white.png" alt="The Delta" /></a>
+    <ul class="nav-links">
+      <li class="has-dropdown"><a class="nav-trigger active" href="#">Solutions <svg class="nav-caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg></a></li>
+      <li><a href="#">Offerings</a></li>
+      <li><a href="#">Campus</a></li>
+      <li><a href="#">About us</a></li>
+    </ul>
+    <a class="btn btn-white btn-lg nav-cta-desktop" href="#contact">Speak with us</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="for-founders.html">For founders</a>
+    <a href="for-mentors.html">For mentors</a>
+    <a href="for-investors.html">For investors</a>
+    <a href="for-partners.html">For partners</a>
+    <a href="for-talent.html">For talent</a>
+    <a class="btn btn-white btn-lg" href="#contact">Speak with us</a>
+  </div>
+  <div class="nav-mega" id="navMega">
+    <div class="nav-mega-promo"><img src="project/assets/nav-workspace.png" alt="The Delta Berlin" /></div>
+    <div class="nav-mega-frame">
+      <div class="nav-mega-col">
+        <p class="nav-mega-label">Solutions</p>
+        <ul class="nav-mega-list">
+          <li><a href="for-founders.html">For founders</a></li>
+          <li><a href="for-mentors.html">For mentors</a></li>
+          <li><a href="for-investors.html" class="active-page">For investors</a></li>
+          <li><a href="for-partners.html">For partners</a></li>
+          <li><a href="for-talent.html">For talent</a></li>
+        </ul>
+      </div>
+      <div class="nav-mega-col">
+        <p class="nav-mega-label">Offerings</p>
+        <ul class="nav-mega-list">
+          <li><a href="#">Workspace</a></li>
+          <li><a href="#">Studio</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Network</a></li>
+          <li><a href="#">Events</a></li>
+        </ul>
+      </div>
+      <div class="nav-mega-col">
+        <p class="nav-mega-label">Campus</p>
+        <ul class="nav-mega-list">
+          <li><a href="#">Berlin campus</a></li>
+          <li><a class="is-disabled" href="#">Cape Town (coming soon)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="nav-mega-side">
+      <div class="nav-mega-group">
+        <p class="nav-mega-label">Company</p>
+        <ul class="nav-mega-list">
+          <li><a href="#">About us</a></li>
+          <li><a href="#contact">Contact us</a></li>
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline poster="project/assets/hero-bg.png"><source src="project/assets/hero-bg.mp4" type="video/mp4" /></video>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-pill">solutions · apex investor network</div>
+    <h1>Access the next generation<br>of leading <strong>ventures.</strong></h1>
+    <p class="hero-sub">Join Apex, The Delta's invite-only investor community — where Europe's most promising founders meet experienced angels and VCs.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-white btn-lg" href="#apply">Apply to join Apex</a>
+      <a class="btn btn-outline btn-lg" href="#about">Learn more</a>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section style="background:#0f0f1f;border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="stats-row" data-reveal>
+      <div class="stat-cell"><div class="stat-num">€1.5b<span style="font-size:28px;color:var(--muted-2);">+</span></div><div class="stat-label">raised by our ventures</div></div>
+      <div class="stat-cell"><div class="stat-num">50<span style="font-size:28px;color:var(--muted-2);">+</span></div><div class="stat-label">ventures in portfolio</div></div>
+      <div class="stat-cell"><div class="stat-num">€12m</div><div class="stat-label">inception fund size</div></div>
+      <div class="stat-cell"><div class="stat-num">35<span style="font-size:28px;color:var(--muted-2);">+</span></div><div class="stat-label">ventures backed</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+      <div data-reveal>
+        <span class="eyebrow eyebrow-accent">About Apex</span>
+        <h2 style="font-size:44px;font-weight:400;letter-spacing:-0.02em;line-height:1.1;margin-bottom:24px;">Curated deal flow from inside <strong>the ecosystem</strong></h2>
+        <p style="color:var(--muted-2);font-size:17px;line-height:1.65;margin-bottom:16px;">Apex is an invite-only investor community connecting experienced angels, VCs, and family offices with Europe's most promising ventures. Members gain exclusive access to curated deal flow, strategic co-investment opportunities, and direct engagement with founders.</p>
+        <p style="color:var(--muted-2);font-size:17px;line-height:1.65;">Beyond capital, investors contribute expertise, mentorship, and strategic guidance to shape the next generation of companies — while building meaningful relationships within the ecosystem.</p>
+      </div>
+      <div data-reveal style="position:relative;overflow:hidden;height:380px;">
+        <img src="project/assets/campus-building.png" alt="The Delta Campus" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow eyebrow-accent">Why join Apex</span>
+      <h2>Built for serious <strong>investors</strong></h2>
+      <p>Six advantages of being inside Europe's most active early-stage startup campus.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card" data-reveal>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <h3>Curated deal flow</h3>
+        <p>Receive exclusive introductions to ventures aligned with your thesis. Every deal is vetted and personalised based on your investment preferences, stage focus, and sector expertise.</p>
+      </div>
+      <div class="benefit-card" data-reveal>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>Early access</h3>
+        <p>Be the first to meet founders from our Studio and Services programmes. Get early visibility into high-potential ventures before they hit the broader market.</p>
+      </div>
+      <div class="benefit-card" data-reveal>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Community &amp; events</h3>
+        <p>Join investor roundtables, founder showcases, and exclusive networking events. Build relationships with fellow investors and the entrepreneurs they back.</p>
+      </div>
+      <div class="benefit-card" data-reveal>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <h3>Collaborative network</h3>
+        <p>Co-invest alongside experienced angels and serial entrepreneurs. Share due diligence, leverage collective expertise, and access better deal terms through syndication.</p>
+      </div>
+      <div class="benefit-card" data-reveal>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <h3>Priority access to experts</h3>
+        <p>Your portfolio companies gain direct access to our network of specialists across product, growth, sales, engineering, and operations — at the right time.</p>
+      </div>
+      <div class="benefit-card" data-reveal>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Visibility &amp; partnerships</h3>
+        <p>Get involved as a mentor, advisor, or speaker at our events. Build your brand within the ecosystem while supporting the next generation of founders.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APEX TIERS -->
+<section class="section" id="apply">
+  <div class="container">
+    <div class="section-head centered" data-reveal>
+      <span class="eyebrow eyebrow-accent">Membership options</span>
+      <h2>Three ways to <strong>invest</strong></h2>
+      <p>From deal-flow access to hands-on co-founding — choose the depth of engagement that's right for you.</p>
+    </div>
+    <div class="apex-grid" data-reveal>
+      <div class="apex-card">
+        <span class="apex-badge">Apex Member</span>
+        <h3>Apex Member</h3>
+        <p>Access to deal flow, events, and co-investment opportunities within The Delta ecosystem.</p>
+        <ul class="apex-features">
+          <li>Curated deal flow introductions</li>
+          <li>Investor roundtables and founder showcases</li>
+          <li>Co-investment syndication access</li>
+          <li>2 campus day passes per month</li>
+        </ul>
+      </div>
+      <div class="apex-card" style="background:rgba(227,0,204,0.04);border-left:2px solid var(--accent);">
+        <span class="apex-badge">Studio LP</span>
+        <h3>Studio LP</h3>
+        <p>Invest directly in the Delta Inception Fund (€12M), backing 35+ high-potential ventures across Europe.</p>
+        <ul class="apex-features">
+          <li>Everything from Apex Member</li>
+          <li>Direct LP position in Delta Inception Fund</li>
+          <li>Portfolio of 35+ vetted ventures</li>
+          <li>Quarterly LP reporting and updates</li>
+          <li>Priority access to follow-on rounds</li>
+        </ul>
+      </div>
+      <div class="apex-card">
+        <span class="apex-badge">Studio Partner</span>
+        <h3>Studio Partner</h3>
+        <p>A hands-on co-founder-investor role for seasoned entrepreneurs who want to build alongside the next generation.</p>
+        <ul class="apex-features">
+          <li>Everything from Studio LP</li>
+          <li>Active co-founding role in selected ventures</li>
+          <li>Equity stake alongside the founding team</li>
+          <li>Resident access at The Delta Campus Berlin</li>
+          <li>Direct involvement in studio programme</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head centered" data-reveal>
+      <span class="eyebrow eyebrow-accent">FAQ</span>
+      <h2>Common <strong>questions</strong></h2>
+    </div>
+    <div class="faq-list" data-reveal>
+      <div class="faq-item">
+        <button class="faq-q">What is Apex and how does it work? <svg class="faq-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Apex is The Delta's invite-only investor community. We curate introductions between investors and founders based on thesis alignment, stage, and sector. Members receive deal flow, attend exclusive events, and can co-invest alongside other Apex members. Applications are reviewed quarterly.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What's the difference between Apex Member, Studio LP, and Studio Partner? <svg class="faq-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Apex Members access deal flow and events. Studio LPs invest directly into the €12M Delta Inception Fund, gaining exposure to a diversified portfolio of 35+ ventures. Studio Partners are active operators who co-found ventures within the studio — it's a hands-on role, not a passive investment.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How is deal flow curated? <svg class="faq-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>We curate introductions based on your investment preferences, stage focus, sector expertise, and check size. We don't blast all deals to all investors — every introduction is personalised. Founders in our studio, services, and campus programmes are the primary source of deal flow.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I mentor or advise founders as an Apex member? <svg class="faq-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Yes. Many Apex members take on advisory or mentoring roles alongside their investment. We can facilitate these conversations and introductions. If you want a more structured mentoring role, you can also apply to the Delta Mentor Network separately.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What types of investors join Apex? <svg class="faq-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner"><p>Apex includes angels, micro-VCs, family offices, and strategic corporate investors. The common thread: serious capital and genuine willingness to engage with early-stage founders. We don't accept passive investors looking for a deal-flow newsletter — every member contributes to the community.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <h2>Ready to access Europe's<br>top <strong>deal flow?</strong></h2>
+  <p>Apply to join Apex and we'll review your application within two weeks.</p>
+  <div class="cta-btn-group">
+    <a class="btn btn-lg btn-dark-cta" href="mailto:hello@thedelta.io">Apply to join Apex</a>
+    <a class="btn btn-lg btn-outline-dark" href="index.html">Back to home</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="project/assets/logo-white.png" alt="The Delta" />
+        <p>Building the launchpads for the next wave of generational companies.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="for-founders.html">For founders</a></li>
+          <li><a href="for-mentors.html">For mentors</a></li>
+          <li><a href="for-investors.html">For investors</a></li>
+          <li><a href="for-partners.html">For partners</a></li>
+          <li><a href="for-talent.html">For talent</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Offerings</h4>
+        <ul>
+          <li><a href="#">Workspace</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Studio</a></li>
+          <li><a href="#">Network</a></li>
+          <li><a href="#">Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <span>The Delta Group © 2025. All rights reserved.</span>
+        <div class="links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Impressum</a></div>
+      </div>
+      <div class="footer-socials">
+        <a href="https://www.linkedin.com/company/thedeltacampus" class="footer-social-btn" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.instagram.com/thedeltacampus/" class="footer-social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){var els=document.querySelectorAll('[data-reveal]');var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target);}});},{threshold:0.1});els.forEach(function(el){io.observe(el);});})();
+  (function(){var nav=document.getElementById('mainNav');var links=nav.querySelector('.nav-links');var mega=document.getElementById('navMega');var t;function open(){clearTimeout(t);nav.classList.add('mega-open');}function close(){t=setTimeout(function(){nav.classList.remove('mega-open');},160);}[links,mega].forEach(function(el){if(el){el.addEventListener('mouseenter',open);el.addEventListener('mouseleave',close);}});})();
+  (function(){var nav=document.getElementById('mainNav');document.getElementById('navBurger').addEventListener('click',function(){nav.classList.toggle('menu-open');});document.getElementById('mobileMenu').querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('menu-open');});});})();
+  (function(){document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.closest('.faq-item');var wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});if(!wasOpen)item.classList.add('open');});});})();
+</script>
+</body>
+</html>
