@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About us | The Delta Ecosystem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #131323;
+    --accent: #E300CC;
+    --text: #ffffff;
+    --muted: #888888;
+    --muted-2: #aaaaaa;
+    --card: #0f0f20;
+    --border: rgba(255,255,255,0.08);
+    --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system-ui, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  ::selection { background: var(--accent); color: #fff; }
+  .container { max-width: 1920px; margin: 0 auto; padding: 0 64px; }
+  .eyebrow { font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.38); font-weight: 400; }
+
+  /* ===== NAV ===== */
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 40px; }
+  .nav-inner { height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px; background: rgba(19,19,35,0.6); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 0 28px; border: 1px solid rgba(255,255,255,0.07); }
+  .nav-logo img { height: auto; width: 110px; }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links > li { position: relative; }
+  .nav-links a { font-size: 15px; color: var(--muted-2); transition: color 200ms var(--ease); }
+  .nav-links a:hover, .nav-links a.active-nav { color: var(--text); }
+  .nav-trigger { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+  .nav-caret { width: 10px; height: 10px; flex: none; transition: transform 300ms var(--ease); }
+  .nav-caret path { stroke: currentColor; }
+  .nav.mega-open .nav-caret { transform: rotate(180deg); }
+  .nav-mega { position: absolute; top: calc(100% - 4px); left: 40px; right: 40px; background: #F5F7FF; border: 1px solid rgba(19,19,35,0.10); display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; padding: 26px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(6px); transition: opacity 300ms var(--ease), transform 300ms var(--ease), visibility 300ms var(--ease); z-index: 90; }
+  .nav.mega-open .nav-mega { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+  .nav-mega-col { padding: 28px 32px 40px; border-right: 1px solid rgba(19,19,35,0.13); }
+  .nav-mega-col:last-child { border-right: none; padding: 0; }
+  .nav-mega-col:last-child .nav-mega-group { padding: 28px 32px 36px; }
+  .nav-mega-col:last-child .nav-mega-group + .nav-mega-group { border-top: 1px solid rgba(19,19,35,0.13); }
+  .nav-mega-label { font-size: 14px; color: rgba(19,19,35,0.42); margin-bottom: 24px; font-weight: 400; }
+  .nav-mega-list { display: flex; flex-direction: column; gap: 4px; list-style: none; padding: 0; margin: 0; }
+  .nav-mega-list a { display: flex; align-items: center; font-size: 15px; color: #131323; padding: 10px 14px; margin: 0 -14px; border: 1px solid transparent; transition: color 180ms var(--ease), border-color 240ms var(--ease); }
+  .nav-mega-list a::after { content: "→"; margin-left: auto; padding-left: 16px; color: var(--accent); opacity: 0; transform: translateX(-10px); transition: opacity 240ms var(--ease), transform 240ms var(--ease); }
+  .nav-mega-list a:hover { color: var(--accent); border-color: rgba(19,19,35,0.16); }
+  .nav-mega-list a:hover::after { opacity: 1; transform: translateX(0); }
+  .nav-mega-list a.active-page { color: var(--accent); font-weight: 600; }
+  .nav-mega-list a.is-disabled { color: rgba(19,19,35,0.35); pointer-events: none; }
+  .nav-mega-list a.is-disabled::after { content: none; }
+  .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; background: none; border: none; cursor: pointer; flex: none; }
+  .nav-burger span { display: block; width: 22px; height: 2px; background: #fff; transition: transform 220ms var(--ease), opacity 180ms var(--ease); }
+  .nav.menu-open .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav.menu-open .nav-burger span:nth-child(2) { opacity: 0; }
+  .nav.menu-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; flex-direction: column; margin: 8px 0 0; padding: 12px; background: rgba(19,19,35,0.96); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.07); }
+  .mobile-menu a { padding: 14px 16px; font-size: 16px; color: var(--muted-2); transition: background 180ms var(--ease); }
+  .mobile-menu a:not(.btn):hover { background: rgba(255,255,255,0.06); }
+  .mobile-menu a.btn { justify-content: center; margin-top: 8px; }
+  .nav.menu-open .mobile-menu { display: flex; }
+  @media (max-width: 768px) { .nav { padding: 12px 16px; } .nav-links { display: none; } .nav-cta-desktop { display: none; } .nav-burger { display: flex; } }
+
+  /* ===== BUTTONS ===== */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 13px; font-weight: 600; border: none; cursor: pointer; border-radius: 0; padding: 10px 22px; transition: transform 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease), color 200ms var(--ease); }
+  .btn-white { background: #fff; color: #131323; }
+  .btn-white:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.8); transform: translateY(-1px); }
+  .btn-outline-dark { background: transparent; color: #131323; border: 1px solid rgba(19,19,35,0.3); }
+  .btn-outline-dark:hover { border-color: #131323; transform: translateY(-1px); }
+  .btn-dark { background: #131323; color: #fff; }
+  .btn-dark:hover { background: var(--accent); transform: translateY(-1px); }
+  .btn-lg { padding: 13px 28px; font-size: 14px; }
+
+  /* reveal */
+  [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
+  [data-reveal].is-visible { opacity: 1; transform: none; }
+
+  /* ===== HERO ===== */
+  .hero-about { position: relative; padding: 220px 0 120px; overflow: hidden; }
+  .hero-about .container { position: relative; z-index: 1; }
+  .hero-about h1 { font-size: 64px; font-weight: 400; line-height: 1.12; letter-spacing: -0.03em; max-width: 1120px; }
+  .hero-about h1 .lead { color: #fff; }
+  .hero-about h1 .reveal-word { color: rgba(255,255,255,0.28); transition: color 0.5s var(--ease); }
+  .hero-about h1 .reveal-word.lit { color: #fff; }
+
+  /* ===== MISSION + STORY ===== */
+  .mission-section { padding: 40px 0 96px; }
+  .mission-grid { display: grid; grid-template-columns: 1.08fr 1fr 0.62fr; gap: 0; align-items: stretch; }
+  .mission-statement { background: #17162b; padding: 52px 48px; display: flex; flex-direction: column; justify-content: center; min-height: 340px; }
+  .mission-statement .eyebrow { margin-bottom: 18px; }
+  .mission-statement h2 { font-size: 40px; font-weight: 400; line-height: 1.12; letter-spacing: -0.025em; max-width: 340px; }
+  .story-card { background: transparent; border: 1px solid var(--border); padding: 44px 46px; display: flex; align-items: center; }
+  .story-card p { color: var(--muted-2); font-size: 16px; line-height: 1.75; }
+  .story-photo { overflow: hidden; position: relative; min-height: 340px; }
+  .story-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+
+  /* ===== GROWTH MAP ===== */
+  .growth-map { margin-top: -1px; position: relative; overflow: hidden; border: 1px solid var(--border); background: #0a0a16 url('project/assets/growth-globe.png') center / cover no-repeat; min-height: 480px; padding: 56px 56px; }
+  .growth-copy { position: relative; z-index: 3; max-width: 380px; }
+  .growth-copy h3 { font-size: 27px; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 22px; }
+  .growth-copy p { color: rgba(255,255,255,0.66); font-size: 14.5px; line-height: 1.7; }
+  .growth-copy p + p { margin-top: 14px; }
+
+  /* ===== THRIVE ACCORDION ===== */
+  .thrive-section { padding: 96px 0; text-align: center; }
+  .thrive-section .eyebrow { display: block; margin-bottom: 18px; }
+  .thrive-section h2 { font-size: 44px; font-weight: 400; letter-spacing: -0.025em; line-height: 1.12; margin-bottom: 56px; }
+  .thrive-section h2 strong { font-weight: 700; }
+  .thrive-grid { display: grid; grid-template-columns: 0.42fr 0.58fr; gap: 0; align-items: stretch; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; text-align: left; }
+  .tabs { display: flex; flex-direction: column; height: 100%; }
+  .tabs > .tab { flex: 1; }
+  .tabs > .tab.active { flex: 4; }
+  .tab { position: relative; overflow: hidden; text-align: left; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 26px 28px; cursor: pointer; font-family: inherit; color: var(--text); display: flex; flex-direction: column; justify-content: flex-start; transition: background 800ms cubic-bezier(0.16,1,0.3,1), flex 600ms cubic-bezier(0.4,0,0.2,1), padding 500ms cubic-bezier(0.4,0,0.2,1); }
+  .tab:last-child { border-bottom: none; }
+  .tab-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .tab-title { font-size: 23px; font-weight: 500; letter-spacing: -0.01em; color: #fff; line-height: 1.15; }
+  .tab-arrow-box { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.18); flex: none; transition: background 400ms var(--ease), border-color 400ms var(--ease); }
+  .tab-arrow-icon { display: inline-block; font-size: 16px; color: #A1A1A7; transition: transform 500ms cubic-bezier(0.2,0.7,0.2,1), color 500ms cubic-bezier(0.2,0.7,0.2,1); }
+  .tab.active .tab-arrow-icon, .tab:hover .tab-arrow-icon { transform: rotate(-45deg); color: #fff; }
+  .tab.active .tab-arrow-box, .tab:hover .tab-arrow-box { background: var(--accent); border-color: var(--accent); }
+  .tab-desc-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 550ms cubic-bezier(0.2,0.7,0.2,1); }
+  .tab.active .tab-desc-wrap { grid-template-rows: 1fr; }
+  .tab-desc-inner { overflow: hidden; }
+  .tab-desc { color: #fff; font-size: 15px; line-height: 1.6; opacity: 0; transition: opacity 400ms cubic-bezier(0.2,0.7,0.2,1) 120ms; padding-top: 12px; max-width: 320px; }
+  .tab.active .tab-desc { opacity: 1; }
+  .tab.active { background: #0e0618; }
+  .tab.active::before { content: ''; position: absolute; width: 100%; height: 100%; top: 45%; left: -6%; background: var(--accent); filter: blur(80px); border-radius: 50%; z-index: 0; pointer-events: none; opacity: 0.88; }
+  .tab.active::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='1' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='300' height='300' fill='black' filter='url(%23n)' opacity='0.45'/></svg>"); mix-blend-mode: overlay; pointer-events: none; z-index: 0; }
+  .tab > * { position: relative; z-index: 1; }
+  .thrive-card { position: relative; overflow: hidden; min-height: 540px; }
+  .thrive-photo-bg { position: absolute; inset: 0; z-index: 0; }
+  .thrive-photo-bg img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 400ms ease; }
+
+  /* ===== VALUES ===== */
+  .values-section { padding: 40px 0 96px; text-align: center; }
+  .values-section .eyebrow { display: block; margin-bottom: 18px; }
+  .values-section h2 { font-size: 48px; font-weight: 400; letter-spacing: -0.025em; margin-bottom: 56px; }
+  .values-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); border-left: 1px solid var(--border); text-align: left; }
+  .value-cell { padding: 44px 48px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .value-icon { width: 34px; height: 34px; margin-bottom: 64px; color: var(--accent); object-fit: contain; display: block; }
+  .value-cell h3 { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 12px; }
+  .value-cell p { color: var(--muted-2); font-size: 15px; line-height: 1.65; max-width: 440px; }
+
+  /* ===== CTA BAND ===== */
+  .cta-banner-wrap {
+    margin-bottom: 0;
+    background: #eeeef5 url('project/assets/cta-bg.png') center center / cover no-repeat;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-image: linear-gradient(to right, #E300CC 0%, #9F5AC5 53%, #8090AB 80%, #52C2BC 100%) 1;
+    text-align: center;
+    padding: 96px 64px;
+  }
+  .cta-banner { max-width: 820px; margin: 0 auto; }
+  .cta-banner h2 { font-size: 56px; font-weight: 400; letter-spacing: -0.02em; color: #131323; margin-bottom: 20px; line-height: 1.1; }
+  .cta-banner h2 strong { font-weight: 700; }
+  .cta-banner p { color: rgba(19,19,35,0.55); max-width: 480px; margin: 0 auto 36px; font-size: 14px; }
+  .cta-banner .hero-ctas { justify-content: center; display: flex; gap: 12px; }
+
+  /* ===== MEET THE TEAM ===== */
+  .team-section { padding: 110px 0 80px; position: relative; }
+  .team-collage { position: relative; max-width: 1100px; margin: 0 auto; min-height: 780px; }
+  .team-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; max-width: 540px; z-index: 2; }
+  .team-center .eyebrow { display: block; margin-bottom: 16px; }
+  .team-center h2 { font-size: 52px; font-weight: 400; letter-spacing: -0.03em; margin-bottom: 18px; }
+  .team-center p { color: var(--muted-2); font-size: 16px; line-height: 1.7; }
+  .collage-photo { position: absolute; box-shadow: 0 20px 50px -20px rgba(0,0,0,0.6); will-change: transform, opacity; object-fit: cover; }
+  .team-collage.expand-ready .collage-photo { opacity: 0; transition: transform 1000ms var(--ease), opacity 700ms var(--ease); }
+  .team-collage.expanded .collage-photo { opacity: 1; transform: none !important; }
+
+  /* ===== LEADERSHIP ===== */
+  .leadership-section { padding: 40px 0 110px; text-align: center; }
+  .leadership-section > .container > h2 { font-size: 52px; font-weight: 400; letter-spacing: -0.03em; margin-bottom: 64px; }
+  .lead-group { margin-bottom: 72px; }
+  .lead-group-title { font-family: 'DM Sans', sans-serif; font-size: 30px; font-weight: 400; letter-spacing: -0.01em; text-transform: none; color: #fff; margin-bottom: 34px; }
+  .lead-grid { display: grid; gap: 22px; justify-content: center; }
+  .lead-grid.cols-2 { grid-template-columns: repeat(2, 240px); }
+  .lead-grid.cols-3 { grid-template-columns: repeat(3, 240px); }
+  .lead-grid.cols-4 { grid-template-columns: repeat(4, 240px); }
+  .lead-card { background: transparent; border: none; padding: 0; text-align: left; }
+  .lead-photo { width: 100%; height: 260px; filter: grayscale(1) contrast(1.02); border: 1px solid var(--border); display: block; object-fit: cover; object-position: center top; }
+  .lead-meta { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; padding: 16px 2px 0; }
+  .lead-meta h4 { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+  .lead-meta p { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+  .lead-li { flex: none; display: inline-flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); transition: color 180ms var(--ease); }
+  .lead-li:hover { color: var(--accent); }
+  .lead-li svg { width: 18px; height: 18px; }
+  .lead-li img { width: 18px; height: 18px; display: block; opacity: 0.6; transition: opacity 180ms var(--ease); }
+  .lead-li:hover img { opacity: 1; }
+
+  /* ===== FOOTER ===== */
+  .footer { background: #0c0c18; padding: 80px 0 40px; border-top: 1px solid var(--border); }
+  .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 56px; border-bottom: 1px solid var(--border); }
+  .footer-brand img { width: 130px; margin-bottom: 22px; }
+  .footer-brand p { color: var(--muted); font-size: 15px; max-width: 260px; line-height: 1.6; }
+  .footer-col h4 { font-weight: 500; margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col a { color: var(--muted-2); font-size: 14px; transition: color 180ms var(--ease); }
+  .footer-col a:hover { color: var(--text); }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 28px; flex-wrap: wrap; }
+  .footer-bottom-left { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; color: var(--muted); font-size: 13px; }
+  .footer-bottom-left .links { display: flex; gap: 22px; }
+  .footer-socials { display: flex; gap: 12px; }
+  .footer-social-btn { width: 36px; height: 36px; border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; color: var(--muted-2); transition: background 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease); }
+  .footer-social-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .footer-social-btn svg { width: 17px; height: 17px; fill: currentColor; }
+
+  @media (max-width: 1080px) {
+    .mission-grid, .thrive-grid, .values-grid { grid-template-columns: 1fr; }
+    .hero-about h1 { font-size: 46px; }
+    .lead-grid.cols-2, .lead-grid.cols-3, .lead-grid.cols-4 { grid-template-columns: repeat(2, minmax(180px, 240px)); }
+    .team-collage { min-height: 0; }
+    .team-center { position: static; transform: none; max-width: none; margin-bottom: 32px; }
+    .collage-photo { position: static !important; width: 100% !important; height: auto !important; margin-bottom: 16px; inset: auto !important; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 24px; }
+    .lead-grid.cols-2, .lead-grid.cols-3, .lead-grid.cols-4 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="container nav-inner">
+    <a class="nav-logo" href="index.html"><img src="project/assets/logo-white.png" alt="The Delta" /></a>
+    <ul class="nav-links">
+      <li class="has-dropdown">
+        <a class="nav-trigger" href="#">Solutions
+          <svg class="nav-caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg>
+        </a>
+      </li>
+      <li class="has-dropdown">
+        <a class="nav-trigger" href="#">Offerings
+          <svg class="nav-caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg>
+        </a>
+      </li>
+      <li class="has-dropdown">
+        <a class="nav-trigger" href="#">Campus
+          <svg class="nav-caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg>
+        </a>
+      </li>
+      <li><a href="about-us.html" class="active-nav">About us</a></li>
+    </ul>
+    <a class="btn btn-white btn-lg nav-cta-desktop" href="#contact">Chat to a specialist</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="for-founders.html">For founders</a>
+    <a href="for-mentors.html">For mentors</a>
+    <a href="for-investors.html">For investors</a>
+    <a href="for-partners.html">For partners</a>
+    <a href="for-talent.html">For talent</a>
+    <a href="about-us.html">About us</a>
+    <a class="btn btn-white btn-lg" href="#contact">Chat to a specialist</a>
+  </div>
+  <div class="nav-mega" id="navMega">
+    <div class="nav-mega-col">
+      <p class="nav-mega-label">By Solutions</p>
+      <ul class="nav-mega-list">
+        <li><a href="for-founders.html">For founders</a></li>
+        <li><a href="for-mentors.html">For mentors</a></li>
+        <li><a href="for-investors.html">For investors</a></li>
+        <li><a href="for-partners.html">For partners</a></li>
+        <li><a href="for-talent.html">For talent</a></li>
+      </ul>
+    </div>
+    <div class="nav-mega-col">
+      <p class="nav-mega-label">By Offering</p>
+      <ul class="nav-mega-list">
+        <li><a href="#">Workspace</a></li>
+        <li><a href="#">Studio</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Network</a></li>
+        <li><a href="#">Events</a></li>
+      </ul>
+    </div>
+    <div class="nav-mega-col">
+      <p class="nav-mega-label">By Service</p>
+      <ul class="nav-mega-list">
+        <li><a href="#">Product strategy</a></li>
+        <li><a href="brand-identity.html">Brand design</a></li>
+        <li><a href="#">Product design (UX/UI)</a></li>
+        <li><a href="#">Software development</a></li>
+        <li><a href="#">Team augmentation</a></li>
+        <li><a href="#">Growth &amp; marketing</a></li>
+        <li><a href="#">AI orchestration</a></li>
+        <li><a href="#">Event organisation</a></li>
+      </ul>
+    </div>
+    <div class="nav-mega-col">
+      <div class="nav-mega-group">
+        <p class="nav-mega-label">Campus</p>
+        <ul class="nav-mega-list">
+          <li><a href="#">Berlin campus</a></li>
+          <li><a class="is-disabled" href="#">Cape Town campus (coming soon)</a></li>
+        </ul>
+      </div>
+      <div class="nav-mega-group">
+        <p class="nav-mega-label">Resources</p>
+        <ul class="nav-mega-list">
+          <li><a href="about-us.html" class="active-page">About us</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero-about">
+  <div class="container">
+    <h1 data-reveal>
+      <span class="lead">We're The Delta, a Berlin startup campus</span> <span class="reveal-word">giving</span> <span class="reveal-word">founders</span> <span class="reveal-word">the</span> <span class="reveal-word">space,</span> <span class="reveal-word">support,</span> <span class="reveal-word">and</span> <span class="reveal-word">funding</span> <span class="reveal-word">to</span> <span class="reveal-word">thrive.</span> <span class="reveal-word">Expanding</span> <span class="reveal-word">to</span> <span class="reveal-word">leading</span> <span class="reveal-word">hubs</span> <span class="reveal-word">across</span> <span class="reveal-word">Europe.</span>
+    </h1>
+  </div>
+</header>
+
+<!-- MISSION + STORY + MAP -->
+<section class="mission-section">
+  <div class="container">
+    <div class="mission-grid">
+      <div class="mission-statement" data-reveal>
+        <p class="eyebrow">Our purpose</p>
+        <h2 style="font-size: 48px">We aim to take ambitious founders to the next level</h2>
+      </div>
+      <div class="story-card" data-reveal>
+        <p style="color: rgb(255, 255, 255)">The Delta was founded by entrepreneurs who believe in the power of entrepreneurship to drive scalable change, but know many ventures fail without proper support. They combined their visions under one name.</p>
+      </div>
+      <div class="story-photo" data-reveal>
+        <img src="project/assets/about-founders.png" alt="Founders at The Delta campus" />
+      </div>
+    </div>
+
+    <div class="growth-map" data-reveal>
+      <div class="growth-copy">
+        <h3>Over the past decade, The Delta has grown into an international venture ecosystem.</h3>
+        <p>Starting as a studio and service provider, it's now a platform with startup campuses, services, capital and a vibrant community of founders, startups, mentors, and investors — beginning with its first campus in Berlin.</p>
+        <p>Today, The Delta helps ambitious founders and startup teams level up. They don't just get office space or services — they join an ecosystem built to transform them and their ventures for extraordinary success.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THRIVE ACCORDION -->
+<section class="thrive-section">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Our mission</p>
+    <h2 data-reveal style="font-size: 64px">We believe founders thrive<br>with access to</h2>
+    <div class="thrive-grid" data-reveal>
+      <div class="tabs">
+        <button class="tab active" data-tab data-img="project/assets/about-founders.png">
+          <div class="tab-top"><span class="tab-title">Personal growth opportunities</span><span class="tab-arrow-box"><span class="tab-arrow-icon">→</span></span></div>
+          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">A Berlin venture campus and ecosystem. Workspace, Studio, Services, Network, Events — five pillars built around founders.</p></div></div>
+        </button>
+        <button class="tab" data-tab data-img="project/assets/involved-photo.jpg">
+          <div class="tab-top"><span class="tab-title">Experienced guidance</span><span class="tab-arrow-box"><span class="tab-arrow-icon">→</span></span></div>
+          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">Hands-on mentorship from operators, investors and founders who have built and scaled ventures before.</p></div></div>
+        </button>
+        <button class="tab" data-tab data-img="project/assets/campus-workspace.png">
+          <div class="tab-top"><span class="tab-title">The right environment</span><span class="tab-arrow-box"><span class="tab-arrow-icon">→</span></span></div>
+          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">A curated campus designed for focus, collaboration and serendipity — surrounded by people solving hard problems.</p></div></div>
+        </button>
+        <button class="tab" data-tab data-img="project/assets/post-building.jpg">
+          <div class="tab-top"><span class="tab-title">A connected network</span><span class="tab-arrow-box"><span class="tab-arrow-icon">→</span></span></div>
+          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">Warm introductions to the partners, talent and customers that move a venture forward faster.</p></div></div>
+        </button>
+        <button class="tab" data-tab data-img="project/assets/campus-building.png">
+          <div class="tab-top"><span class="tab-title">Capital to grow</span><span class="tab-arrow-box"><span class="tab-arrow-icon">→</span></span></div>
+          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">Inception funding and access to a network of aligned investors ready to back the right teams.</p></div></div>
+        </button>
+        <button class="tab" data-tab data-img="project/assets/involved-photo.jpg">
+          <div class="tab-top"><span class="tab-title">Hands-on studio support</span><span class="tab-arrow-box"><span class="tab-arrow-icon">→</span></span></div>
+          <div class="tab-desc-wrap"><div class="tab-desc-inner"><p class="tab-desc">Product, brand, engineering and growth expertise on demand — an embedded team when you need one.</p></div></div>
+        </button>
+      </div>
+      <div class="thrive-card">
+        <div class="thrive-photo-bg"><img src="project/assets/about-founders.png" alt="Founders at The Delta campus" /></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Our values</p>
+    <h2 data-reveal>Company values</h2>
+    <div class="values-grid" data-reveal>
+      <div class="value-cell">
+        <img class="value-icon" src="project/assets/value-lightning.png" alt="" />
+        <h3 style="font-size: 32px; font-weight: 400">Rigorous selection</h3>
+        <p style="color: rgb(255, 255, 255); font-size: 16px">A curated workspace with coworking, private offices, wellness, and event spaces for all building members.</p>
+      </div>
+      <div class="value-cell">
+        <img class="value-icon" src="project/assets/value-bars.png" alt="" />
+        <h3 style="font-size: 32px; font-weight: 400">Willingness to grow</h3>
+        <p style="color: rgb(255, 255, 255); font-size: 16px">A hands-on studio providing capital, mentorship, and experienced operators from day one.</p>
+      </div>
+      <div class="value-cell">
+        <img class="value-icon" src="project/assets/value-people.png" alt="" />
+        <h3 style="font-size: 32px; font-weight: 400">Grit &amp; venture-first mindset</h3>
+        <p style="color: rgb(255, 255, 255); font-size: 16px">We connect founders, mentors, investors, talent, and partners with a focus on trust and alignment.</p>
+      </div>
+      <div class="value-cell">
+        <img class="value-icon" src="project/assets/value-flame.png" alt="" />
+        <h3 style="font-weight: 400; font-size: 32px">High ambition &amp; impact</h3>
+        <p style="color: rgb(255, 255, 255); font-size: 16px">From bi-weekly pitch groups, masterclasses, dinners, and studio open days, we boost founder growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS BAND (CTA) -->
+<section class="cta-banner-wrap" data-reveal>
+  <div class="cta-banner">
+    <h2>Want to help build the next generation of startups?</h2>
+    <p>Check our open roles</p>
+    <div class="hero-ctas">
+      <a class="btn btn-outline btn-lg" style="color:#131323;border-color:rgba(19,19,35,0.4);" href="#contact">View open roles</a>
+    </div>
+  </div>
+</section>
+
+<!-- MEET THE TEAM -->
+<section class="team-section">
+  <div class="container">
+    <div class="team-collage">
+      <div class="team-center">
+        <div data-reveal>
+          <p class="eyebrow">Our purpose</p>
+          <h2>Meet the team</h2>
+          <p>The people behind the launchpad. From workspace to studio to services, we're a team of operators and builders who've been in founders' shoes. We're here to remove the bottlenecks, make the introductions, and back the people solving the world's biggest problems. Come find us on campus.</p>
+        </div>
+      </div>
+      <img id="team-1" class="collage-photo" src="project/assets/team-desk.png" alt="" style="top:12%;left:11%;width:190px;height:142px;" />
+      <img id="team-2" class="collage-photo" src="project/assets/team-kitchen-selfie.png" alt="" style="top:7%;left:55%;width:112px;height:80px;" />
+      <img id="team-3" class="collage-photo" src="project/assets/team-pingpong.png" alt="" style="top:14%;right:4%;width:190px;height:142px;" />
+      <img id="team-4" class="collage-photo" src="project/assets/team-brick-table.png" alt="" style="bottom:9%;left:2%;width:190px;height:142px;" />
+      <img id="team-5" class="collage-photo" src="project/assets/team-laptops.png" alt="" style="bottom:15%;left:33%;width:105px;height:78px;" />
+      <img id="team-6" class="collage-photo" src="project/assets/team-office-group.png" alt="" style="bottom:14%;right:11%;width:190px;height:142px;" />
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="leadership-section">
+  <div class="container">
+    <h2 data-reveal style="font-size: 64px">Meet our leadership</h2>
+
+    <div class="lead-group" data-reveal>
+      <p class="lead-group-title">Board members</p>
+      <div class="lead-grid cols-2">
+        <div class="lead-card">
+          <img id="ld-louis-b" class="lead-photo" src="project/assets/board-louis.png" alt="Louis Buys" />
+          <div class="lead-meta"><div><h4>Louis Buys</h4><p>Founder &amp; CEO</p></div><a class="lead-li" href="#" aria-label="LinkedIn"><img src="project/assets/linkedin-icon.png" alt="LinkedIn" /></a></div>
+        </div>
+        <div class="lead-card">
+          <img id="ld-julian" class="lead-photo" src="project/assets/board-julian.png" alt="Julian Teicke" />
+          <div class="lead-meta"><div><h4>Julian Teicke</h4><p>Chairman</p></div><a class="lead-li" href="#" aria-label="LinkedIn"><img src="project/assets/linkedin-icon.png" alt="LinkedIn" /></a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lead-group" data-reveal>
+      <p class="lead-group-title">Group executive team</p>
+      <div class="lead-grid cols-4">
+        <div class="lead-card">
+          <img id="ld-louis-e" class="lead-photo" src="project/assets/exec-louis.png" alt="Louis Buys" />
+          <div class="lead-meta"><div><h4>Louis Buys</h4><p>Founder &amp; CEO</p></div><a class="lead-li" href="#" aria-label="LinkedIn"><img src="project/assets/linkedin-icon.png" alt="LinkedIn" /></a></div>
+        </div>
+        <div class="lead-card">
+          <img id="ld-navdeep" class="lead-photo" src="project/assets/exec-navdeep.png" alt="Navdeep Sakhon" />
+          <div class="lead-meta"><div><h4>Navdeep Sakhon</h4><p>Chief Investment Officer</p></div><a class="lead-li" href="#" aria-label="LinkedIn"><img src="project/assets/linkedin-icon.png" alt="LinkedIn" /></a></div>
+        </div>
+        <div class="lead-card">
+          <img id="ld-alexandra" class="lead-photo" src="project/assets/exec-alexandra.png" alt="Alexandra Matthews" />
+          <div class="lead-meta"><div><h4>Alexandra Matthews</h4><p>Chief Operating Officer</p></div><a class="lead-li" href="#" aria-label="LinkedIn"><img src="project/assets/linkedin-icon.png" alt="LinkedIn" /></a></div>
+        </div>
+        <div class="lead-card">
+          <img id="ld-denise" class="lead-photo" src="project/assets/exec-denise.png" alt="Denise Nel" />
+          <div class="lead-meta"><div><h4>Denise Nel</h4><p>Chief People Officer</p></div><a class="lead-li" href="#" aria-label="LinkedIn"><img src="project/assets/linkedin-icon.png" alt="LinkedIn" /></a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lead-group" data-reveal>
+      <p class="lead-group-title">Services leadership</p>
+      <div class="lead-grid cols-3">
+        <div class="lead-card">
+          <img id="ld-elisabeth" class="lead-photo" src="project/assets/svc-elisabeth.png" alt="Elisabeth Sebedltsch" />
+          <div class="lead-meta"><div><h4>Elisabeth Sebedltsch</h4><p>Partner</p></div><a class="lead-li" href="#" aria-label="LinkedIn"><img src="project/assets/linkedin-icon.png" alt="LinkedIn" /></a></div>
+        </div>
+        <div class="lead-card">
+          <img id="ld-wynand" class="lead-photo" src="project/assets/svc-wynand.png" alt="Wynand Viljoen" />
+          <div class="lead-meta"><div><h4>Wynand Viljoen</h4><p>Head of Engineering</p></div><a class="lead-li" href="#" aria-label="LinkedIn"><img src="project/assets/linkedin-icon.png" alt="LinkedIn" /></a></div>
+        </div>
+        <div class="lead-card">
+          <img id="ld-alexia" class="lead-photo" src="project/assets/svc-alexia.png" alt="Alexia Pouyaud" />
+          <div class="lead-meta"><div><h4>Alexia Pouyaud</h4><p>Head of Design</p></div><a class="lead-li" href="#" aria-label="LinkedIn"><img src="project/assets/linkedin-icon.png" alt="LinkedIn" /></a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lead-group" data-reveal style="margin-bottom: 0;">
+      <p class="lead-group-title">Campus leadership</p>
+      <div class="lead-grid cols-2">
+        <div class="lead-card">
+          <img id="ld-taveta" class="lead-photo" src="project/assets/campus-taveta.png" alt="Taveta Stoeva" />
+          <div class="lead-meta"><div><h4>Taveta Stoeva</h4><p>Head of Growth</p></div><a class="lead-li" href="#" aria-label="LinkedIn"><img src="project/assets/linkedin-icon.png" alt="LinkedIn" /></a></div>
+        </div>
+        <div class="lead-card">
+          <img id="ld-nina" class="lead-photo" src="project/assets/campus-nina.png" alt="Nina Dangel" />
+          <div class="lead-meta"><div><h4>Nina Dangel</h4><p>Head of Campus Operations</p></div><a class="lead-li" href="#" aria-label="LinkedIn"><img src="project/assets/linkedin-icon.png" alt="LinkedIn" /></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="project/assets/logo-white.png" alt="The Delta" />
+        <p>An ecosystem that helps founders solve the world's biggest problems.</p>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size:20px">Offerings</h4>
+        <ul>
+          <li><a href="#">Product Strategy</a></li>
+          <li><a href="brand-identity.html">Brand Design</a></li>
+          <li><a href="#">Product Design (UX/UI)</a></li>
+          <li><a href="#">Software Development</a></li>
+          <li><a href="#">Team Augmentation</a></li>
+          <li><a href="#">Fundraising Support</a></li>
+          <li><a href="#">Growth Services</a></li>
+          <li><a href="#">AI Assessment ready</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size:20px">The Delta Pillars</h4>
+        <ul>
+          <li><a href="#">Studio</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Capital</a></li>
+          <li><a href="#">Campus</a></li>
+          <li><a href="#">Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size:20px">Resources</h4>
+        <ul>
+          <li><a href="about-us.html">About</a></li>
+          <li><a href="#">Case studies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <span>The Delta Group &copy; 2025. All rights reserved.</span>
+        <div class="links">
+          <a href="#">Imprint</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Cookie preferences</a>
+        </div>
+      </div>
+      <div class="footer-socials">
+        <a href="https://www.linkedin.com/company/thedeltacampus" class="footer-social-btn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" class="footer-social-btn" aria-label="Crunchbase">
+          <svg viewBox="0 0 24 24"><text x="3" y="17" font-size="12" font-weight="700" font-family="sans-serif" fill="currentColor">cb</text></svg>
+        </a>
+        <a href="https://www.instagram.com/thedeltacampus/" class="footer-social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="footer-social-btn" aria-label="Behance">
+          <svg viewBox="0 0 24 24"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 1.202.715 1.99 1.826 1.99.48 0 .844-.23 1.043-.637h3.887zm-7.022-4h3.997c-.111-1.011-.707-1.696-1.964-1.696-1.23 0-1.851.723-2.033 1.696zM9.34 8H4V18h5.34c2.23 0 4.01-1.05 4.01-3.015 0-1.335-.807-2.207-1.96-2.556.87-.41 1.49-1.24 1.49-2.42C12.88 8.987 11.2 8 9.34 8zm-.5 3.889H6.5V9.5h2.34c.85 0 1.315.47 1.315 1.195 0 .724-.465 1.194-1.315 1.194zm.22 3.722H6.5v-2.5h2.56c1.02 0 1.57.553 1.57 1.25 0 .699-.55 1.25-1.57 1.25z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  (function() {
+    var els = document.querySelectorAll('[data-reveal]');
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    els.forEach(function(el) { io.observe(el); });
+  })();
+
+  // Hero — fill headline white word by word on page load
+  (function() {
+    var hero = document.querySelector('.hero-about');
+    var words = hero ? hero.querySelectorAll('.reveal-word') : [];
+    if (!words.length) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      words.forEach(function(w) { w.classList.add('lit'); });
+      return;
+    }
+    words.forEach(function(w, i) {
+      setTimeout(function() { w.classList.add('lit'); }, 350 + i * 110);
+    });
+  })();
+
+  // Team collage — grow + expand out from center on scroll into view
+  (function() {
+    var collage = document.querySelector('.team-collage');
+    if (!collage) return;
+    var photos = Array.prototype.slice.call(collage.querySelectorAll('.collage-photo'));
+    if (!photos.length) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function isStacked() {
+      return getComputedStyle(photos[0]).position === 'static';
+    }
+
+    function setStart() {
+      var cr = collage.getBoundingClientRect();
+      var cx = cr.left + cr.width / 2;
+      var cy = cr.top + cr.height / 2;
+      photos.forEach(function(p) {
+        var pr = p.getBoundingClientRect();
+        var dx = cx - (pr.left + pr.width / 2);
+        var dy = cy - (pr.top + pr.height / 2);
+        p.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(0.18)';
+      });
+    }
+
+    function play() {
+      collage.classList.add('expanded');
+      photos.forEach(function(p, i) {
+        p.style.transitionDelay = (i * 70) + 'ms';
+      });
+    }
+
+    if (reduce || isStacked()) return;
+
+    collage.classList.add('expand-ready');
+    setStart();
+    window.addEventListener('resize', function() {
+      if (!collage.classList.contains('expanded')) setStart();
+    });
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { play(); io.unobserve(collage); }
+      });
+    }, { threshold: 0.35 });
+    io.observe(collage);
+  })();
+
+  // Mega nav
+  (function() {
+    var nav = document.getElementById('mainNav');
+    var links = nav.querySelector('.nav-links');
+    var mega = document.getElementById('navMega');
+    var t;
+    function open() { clearTimeout(t); nav.classList.add('mega-open'); }
+    function close() { t = setTimeout(function() { nav.classList.remove('mega-open'); }, 160); }
+    [links, mega].forEach(function(el) {
+      if (el) { el.addEventListener('mouseenter', open); el.addEventListener('mouseleave', close); }
+    });
+  })();
+
+  // Mobile menu
+  (function() {
+    var nav = document.getElementById('mainNav');
+    var burger = document.getElementById('navBurger');
+    var menu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', function() { nav.classList.toggle('menu-open'); });
+    menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { nav.classList.remove('menu-open'); }); });
+  })();
+
+  // Thrive tabs — toggle active + swap image
+  (function() {
+    var photo = document.querySelector('.thrive-section .thrive-photo-bg img');
+    var tabs = document.querySelectorAll('.thrive-section .tab[data-tab]');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        var img = tab.dataset.img;
+        if (img && photo) {
+          photo.style.opacity = '0';
+          setTimeout(function() { photo.src = img; photo.style.opacity = '1'; }, 350);
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>

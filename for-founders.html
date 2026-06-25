@@ -38,17 +38,12 @@
   .nav-caret { width: 10px; height: 10px; flex: none; transition: transform 300ms var(--ease); }
   .nav-caret path { stroke: currentColor; }
   .nav.mega-open .nav-caret { transform: rotate(180deg); }
-  .nav-mega { position: absolute; top: calc(100% - 4px); left: 40px; right: 40px; background: #F5F7FF; border: 1px solid rgba(19,19,35,0.10); display: grid; grid-template-columns: minmax(200px,1fr) 3fr 1fr; gap: 0; padding: 16px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(6px); transition: opacity 300ms var(--ease), transform 300ms var(--ease), visibility 300ms var(--ease); z-index: 90; }
+  .nav-mega { position: absolute; top: calc(100% - 4px); left: 40px; right: 40px; background: #F5F7FF; border: 1px solid rgba(19,19,35,0.10); display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; padding: 26px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(6px); transition: opacity 300ms var(--ease), transform 300ms var(--ease), visibility 300ms var(--ease); z-index: 90; }
   .nav.mega-open .nav-mega { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
-  .nav-mega-frame { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid rgba(19,19,35,0.13); }
-  .nav-mega-col { padding: 28px 32px 40px; }
-  .nav-mega-frame .nav-mega-col { border-right: 1px solid rgba(19,19,35,0.13); }
-  .nav-mega-frame .nav-mega-col:last-child { border-right: none; }
-  .nav-mega-side { display: flex; flex-direction: column; border: 1px solid rgba(19,19,35,0.13); border-left: none; }
-  .nav-mega-side .nav-mega-group { padding: 28px 28px 36px; }
-  .nav-mega-side .nav-mega-group + .nav-mega-group { border-top: 1px solid rgba(19,19,35,0.13); }
-  .nav-mega-promo { position: relative; overflow: hidden; min-height: 420px; min-width: 200px; }
-  .nav-mega-promo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .nav-mega-col { padding: 28px 32px 40px; border-right: 1px solid rgba(19,19,35,0.13); }
+  .nav-mega-col:last-child { border-right: none; padding: 0; }
+  .nav-mega-col:last-child .nav-mega-group { padding: 28px 32px 36px; }
+  .nav-mega-col:last-child .nav-mega-group + .nav-mega-group { border-top: 1px solid rgba(19,19,35,0.13); }
   .nav-mega-label { font-size: 14px; color: rgba(19,19,35,0.42); margin-bottom: 24px; font-weight: 400; }
   .nav-mega-list { display: flex; flex-direction: column; gap: 4px; list-style: none; padding: 0; margin: 0; }
   .nav-mega-list a { display: flex; align-items: center; font-size: 15px; color: #131323; padding: 10px 14px; margin: 0 -14px; border: 1px solid transparent; transition: color 180ms var(--ease), border-color 240ms var(--ease); }
@@ -623,7 +618,7 @@
           <svg class="nav-caret" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg>
         </a>
       </li>
-      <li><a href="#">About us</a></li>
+      <li><a href="about-us.html">About us</a></li>
     </ul>
     <a class="btn btn-white btn-lg nav-cta-desktop" href="#contact">Chat to a specialist</a>
     <button class="nav-burger" id="navBurger" aria-label="Open menu"><span></span><span></span><span></span></button>
@@ -634,47 +629,56 @@
     <a href="for-investors.html">For investors</a>
     <a href="for-partners.html">For partners</a>
     <a href="for-talent.html">For talent</a>
+    <a href="about-us.html">About us</a>
     <a class="btn btn-white btn-lg" href="#contact">Chat to a specialist</a>
   </div>
   <div class="nav-mega" id="navMega">
-    <div class="nav-mega-promo"><img src="project/assets/nav-workspace.png" alt="The Delta Berlin campus" /></div>
-    <div class="nav-mega-frame">
-      <div class="nav-mega-col">
-        <p class="nav-mega-label">Solutions</p>
-        <ul class="nav-mega-list">
-          <li><a href="for-founders.html" class="active-page">For founders</a></li>
-          <li><a href="for-mentors.html">For mentors</a></li>
-          <li><a href="for-investors.html">For investors</a></li>
-          <li><a href="for-partners.html">For partners</a></li>
-          <li><a href="for-talent.html">For talent</a></li>
-        </ul>
-      </div>
-      <div class="nav-mega-col">
-        <p class="nav-mega-label">Offerings</p>
-        <ul class="nav-mega-list">
-          <li><a href="brand-identity.html">Brand design</a></li>
-          <li><a href="#">Workspace</a></li>
-          <li><a href="#">Studio</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Network</a></li>
-          <li><a href="#">Events</a></li>
-        </ul>
-      </div>
-      <div class="nav-mega-col">
+    <div class="nav-mega-col">
+      <p class="nav-mega-label">By Solutions</p>
+      <ul class="nav-mega-list">
+        <li><a href="for-founders.html" class="active-page">For founders</a></li>
+        <li><a href="for-mentors.html">For mentors</a></li>
+        <li><a href="for-investors.html">For investors</a></li>
+        <li><a href="for-partners.html">For partners</a></li>
+        <li><a href="for-talent.html">For talent</a></li>
+      </ul>
+    </div>
+    <div class="nav-mega-col">
+      <p class="nav-mega-label">By Offering</p>
+      <ul class="nav-mega-list">
+        <li><a href="#">Workspace</a></li>
+        <li><a href="#">Studio</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Network</a></li>
+        <li><a href="#">Events</a></li>
+      </ul>
+    </div>
+    <div class="nav-mega-col">
+      <p class="nav-mega-label">By Service</p>
+      <ul class="nav-mega-list">
+        <li><a href="#">Product strategy</a></li>
+        <li><a href="brand-identity.html">Brand design</a></li>
+        <li><a href="#">Product design (UX/UI)</a></li>
+        <li><a href="#">Software development</a></li>
+        <li><a href="#">Team augmentation</a></li>
+        <li><a href="#">Growth &amp; marketing</a></li>
+        <li><a href="#">AI orchestration</a></li>
+        <li><a href="#">Event organisation</a></li>
+      </ul>
+    </div>
+    <div class="nav-mega-col">
+      <div class="nav-mega-group">
         <p class="nav-mega-label">Campus</p>
         <ul class="nav-mega-list">
           <li><a href="#">Berlin campus</a></li>
-          <li><a class="is-disabled" href="#">Cape Town (coming soon)</a></li>
+          <li><a class="is-disabled" href="#">Cape Town campus (coming soon)</a></li>
         </ul>
       </div>
-    </div>
-    <div class="nav-mega-side">
       <div class="nav-mega-group">
-        <p class="nav-mega-label">Company</p>
+        <p class="nav-mega-label">Resources</p>
         <ul class="nav-mega-list">
-          <li><a href="#">About us</a></li>
+          <li><a href="about-us.html">About us</a></li>
           <li><a href="#contact">Contact us</a></li>
-          <li><a href="index.html">Home</a></li>
         </ul>
       </div>
     </div>
@@ -1009,7 +1013,7 @@
       <div class="footer-col">
         <h4>Resources</h4>
         <ul>
-          <li><a href="#">About</a></li>
+          <li><a href="about-us.html">About</a></li>
           <li><a href="#">Case studies</a></li>
         </ul>
       </div>
